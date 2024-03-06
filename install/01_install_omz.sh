@@ -19,4 +19,4 @@ curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh -
 
 # stow the omz custom theme from the parent directory of this script
 echo "install_omz >> Stowing omz custom theme"
-(cd "$(dirname -- "$scriptPath")/.." && stow -t ~ omz/)
+(cd "$(dirname -- "$scriptPath")/../stowed" && stow -t ~ omz/)
