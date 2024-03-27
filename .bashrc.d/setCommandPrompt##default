@@ -1,20 +1,20 @@
 # set the command prompt
-function set_command_prompt() {
-  # source colors from another file
-  source ~/.bashrc.d/baseTheme
 
-  # set user @ host prompt
-  local user_details="${BOLD}${BRIGHT_CYAN}\u${RESET}${BRIGHT_BLUE}@\h"
+# source colors from another file
+source ~/.bashrc.d/baseTheme
 
-  # set path prompt
-  local path_details="${BOLD}${BRIGHT_ORANGE}\w"
+# set user @ host prompt
+user_details="${BOLD}${BRIGHT_CYAN}\u${RESET}${BRIGHT_BLUE}@\h"
 
-  # set return code prompt
-  local return_details="\$(if [ \$? -eq 0 ]; then echo \"${BRIGHT_GREEN}\"; else echo \"${BRIGHT_RED}\"; fi)→"
- 
-  # set prompt reset
-  local reset_details="${RESET}"
+# set path prompt
+path_details="${BOLD}${BRIGHT_ORANGE}\w"
 
-  PS1="${user_details} ${path_details} ${return_details} ${reset_details}"
-}
+# set return code prompt
+return_details="\$(if [ \$? -eq 0 ]; then echo \"${BRIGHT_GREEN}\"; else echo \"${BRIGHT_RED}\"; fi)→"
+
+# set prompt reset
+reset_details="${RESET}"
+
+# set bash prompt
+PS1="${user_details} ${path_details} ${return_details} ${reset_details}"
 
