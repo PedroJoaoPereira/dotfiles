@@ -3,7 +3,6 @@
 
 # set command prompt
 source ~/.bashrc.d/setCommandPrompt
-set_command_prompt
 
 # silence bash deprecation by zsh
 export BASH_SILENCE_DEPRECATION_WARNING=1
