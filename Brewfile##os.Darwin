@@ -23,6 +23,7 @@ cask "alacritty"
 
 # misc
 brew "neofetch"
+brew "ripgrep"
 
 # ----- ----- ----- -----
 # macos applications installed via homebrew
