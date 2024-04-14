@@ -1,0 +1,121 @@
+// Place your key bindings in this file to override the defaults
+[
+  // ------------------------------
+  // change mod + s to save all files
+  {
+    "key": "shift+cmd+s",
+    "command": "workbench.action.files.saveFiles"
+  },
+
+  // ------------------------------
+  // change mod + b to run task from tasks.json
+  {
+    "key": "shift+cmd+b",
+    "command": "-workbench.action.tasks.build",
+    "when": "taskCommandsRegistered"
+  },
+  {
+    "key": "shift+cmd+b",
+    "command": "workbench.action.tasks.runTask"
+  },
+
+  // ------------------------------
+  // change mod + r to open recent projects
+  {
+    "key": "cmd+r",
+    "command": "workbench.action.openRecent"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "-workbench.action.openRecent"
+  },
+
+  // ------------------------------
+  // change mod + shift + c to checkout git branch
+  {
+    "key": "shift+cmd+c",
+    "command": "-workbench.action.terminal.openNativeConsole",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "shift+cmd+c",
+    "command": "git.checkout"
+  },
+
+  // ------------------------------
+  // change ctrl + shift + ~ to create new terminal
+  {
+    "key": "ctrl+shift+[Quote]",
+    "command": "workbench.action.terminal.new",
+    "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+  },
+  {
+    "key": "ctrl+[Quote]",
+    "command": "-workbench.action.terminal.new",
+    "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+  },
+
+  // ------------------------------
+  // change ctrl + w to kill terminal if focused
+  {
+    "key": "cmd+w",
+    "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus"
+  },
+
+  // ------------------------------
+  // change ctrl + ~ to toggle between terminal and editor focus
+  {
+    "key": "cmd+down",
+    "command": "-workbench.action.terminal.focus",
+    "when": "accessibilityModeEnabled && accessibleViewOnLastLine && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal' || accessibilityModeEnabled && accessibleViewOnLastLine && terminalProcessSupported && accessibleViewCurrentProviderId == 'terminal'"
+  },
+  {
+    "key": "ctrl+[Quote]",
+    "command": "workbench.action.terminal.focus",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+[Quote]",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+
+  // ------------------------------
+  // change ctrl + shift + w to close visual studio code window
+  {
+    "key": "shift+cmd+w",
+    "command": "-workbench.action.closeWindow"
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "workbench.action.closeWindow"
+  },
+
+  // ------------------------------
+  // change ctrl + w to close all editor tabs
+  {
+    "key": "cmd+k cmd+w",
+    "command": "-workbench.action.closeAllEditors"
+  },
+  {
+    "key": "shift+cmd+w",
+    "command": "workbench.action.closeAllEditors"
+  },
+
+  // ------------------------------
+  // change ctrl + shift + e to collapse all folders in explorer
+  {
+    "key": "shift+cmd+e",
+    "command": "workbench.files.action.collapseExplorerFolders",
+    "when": "explorerViewletVisible"
+  }
+
+  // ------------------------------
+  // ...
+]

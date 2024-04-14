@@ -1,5 +1,0 @@
-# files to be ignored by GNU stow
-install**
-install_all.sh
-LICENSE
-README.md
