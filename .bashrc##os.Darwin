@@ -1,9 +1,6 @@
 # customized properties on all interactive shells
 # this is is sourced by .bash_profile
 
-# set command prompt
-source ~/.bashrc.d/setCommandPrompt
-
 # silence bash deprecation by zsh
 export BASH_SILENCE_DEPRECATION_WARNING=1
 # add homebrew to the PATH
@@ -13,4 +10,14 @@ export PATH="/opt/homebrew/bin:$PATH"
 eval "$(zoxide init --cmd cd bash)"
 # add fnm to shell - fast node manager
 eval "$(fnm env)"
+
+# set command prompt
+source ~/.bashrc.d/setCommandPrompt
+
+# temp alias
+alias ll='ls -la'
+alias v='nvim'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
