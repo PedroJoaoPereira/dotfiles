@@ -1,7 +1,11 @@
 # custom alacritty configuration
 
-# import theme file - tokyo night
-import = [ "~/.config/alacritty/themes/tokyo-night.toml" ]
+# import auxiliary files
+import = [
+  "~/.config/alacritty/themes/tokyo-night.toml", # tokyo night theme
+  # custom keybindings
+  "~/.config/alacritty/keybindings.toml",
+]
 
 [font]
 size = 12
