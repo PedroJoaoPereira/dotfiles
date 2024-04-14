@@ -11,12 +11,12 @@ done
 # remove old configurations - this is dangerous if no backups
 # for me if it is not checked in, it is not important
 echo "install_zsh >> Removing old configurations"
-rm -rf ~/.zshrc* ~/.oh-my-zsh
+rm -rf ~/.zshrc*
 
 # stow the zshrc from the parent directory of this script
 echo "install_zsh >> Stowing zshrc"
 (cd "$(dirname -- "$scriptPath")/.." && stow -t ~ zshrc/)
 
-# install oh-my-zsh without overriding the stow'ed zshrc
-echo "install_zsh >> Installing oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+# reloads zsh shell
+echo "install_zsh >> Reloading zsh"
+zsh
