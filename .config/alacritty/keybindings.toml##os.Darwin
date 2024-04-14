@@ -1,10 +1,15 @@
-# custom keybindigs for MacOS
+# custom bindings for MacOS
 
 [keyboard]
 bindings = [
-  { key = "Left",  mods = "Alt",   chars = "\u001bb"                       }, # skip word left
-  { key = "Right", mods = "Alt",   chars = "\u001bf"                       }, # skip word right
-  { key = "Left",  mods = "Super", chars = "\u001b[H", mode = "~AppCursor" }, # home
-  { key = "Right", mods = "Super", chars = "\u001b[F", mode = "~AppCursor" }, # end
-  { key = "Back",  mods = "Super", chars = "\u0015"                        }, # delete line
+  { key = "ArrowLeft", mods = "Option", chars = "\u001bb" },    # Jump left a word
+  { key = "ArrowRight", mods = "Option", chars = "\u001bf" },   # Jump right a word 
+  { key = "ArrowLeft", mods = "Command", chars = "\u001bOH" },  # Start of line
+  { key = "ArrowRight", mods = "Command", chars = "\u001bOF" }, # End of line 
+  { key = "Backspace", mods = "Command", chars = "\u0015" },    # delete word/line
+]
+
+[mouse]
+bindings = [
+  { mouse = "Right", action = "Paste" }, # Right click to paste
 ]
