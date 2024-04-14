@@ -3,8 +3,7 @@
 # import auxiliary files
 import = [
   "~/.config/alacritty/themes/tokyo-night.toml", # tokyo night theme
-  # custom keybindings
-  "~/.config/alacritty/keybindings.toml",
+  "~/.config/alacritty/keybindings.toml", # custom keybindings
 ]
 
 [font]
