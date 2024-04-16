@@ -1,0 +1,28 @@
+{
+    "Always Show Bookmarks Bar" = "^b";
+    "Close Tab" = "^w";
+    "Close Window" = "^$w";
+    Copy = "^c";
+    Cut = "^x";
+    "Developer Tools" = "^$i";
+    Downloads = "^j";
+    "Find..." = "^f";
+    "Force Reload This Page" = "^$r";
+    "New Incognito Window" = "^$n";
+    "New Tab" = "^t";
+    "New Window" = "^n";
+    Paste = "^v";
+    "Paste and Match Style" = "^$v";
+    "Print Using System Dialogue..." = "^$p";
+    "Print..." = "^p";
+    "Re-open Closed Tab" = "^$t";
+    Redo = "^$z";
+    "Reload This Page" = "^r";
+    "Save Page As..." = "^$s";
+    "Search the web..." = "^$f";
+    "Select All" = "^a";
+    "Show full history" = "^h";
+    Undo = "^z";
+    "Zoom In" = "^+";
+    "Zoom Out" = "^-";
+}
