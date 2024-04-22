@@ -1,47 +1,45 @@
 # homebrew repositories
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
-tap "koekeishiya/formulae"
 
 # ----- ----- ----- -----
 # dependencies
 
-# keyboard shortcut daemon
-brew "koekeishiya/formulae/skhd"
-
 # node / work related
-brew "fnm"
-brew "hyperfine"
-brew "git"
-brew "neovim"
+brew "fnm" # node version manager
+brew "hyperfine" # performance test toll
+brew "git" # version control
+brew "neovim" # text editor
 
 # personal tools
-brew "openssh"
-brew "yadm"
-brew "zoxide"
+brew "openssh" # ssh command
+brew "yadm" # dotfiles manager
+
+# enhanced tools
+brew "eza" # enchanced ls command
+brew "ripgrep" # enhanced grep command - used by telescope.nvim
+brew "zoxide" # enhanced cd command
 
 # misc
-brew "neofetch"
-brew "ripgrep"
-brew  "gnupg"
+brew "neofetch" # system details
+brew "gnupg" # encryption and signing
+brew "starship" # bash prompt customization
 
 # ----- ----- ----- -----
 # macos applications installed via homebrew
 
-# terminal
-cask "alacritty"
-# alt-tab windows like
-cask "alt-tab"
-# cheatsheet app to show shortcuts
-cask "cheatsheet"
-# nerd font with pretty icons
-cask "font-hack-nerd-font"
-# window manager
-cask "rectangle"
-# email client
-cask "thunderbird"
-# keyboard layout overwrite
-cask "ukelele"
-# visual code
-cask "visual-studio-code"
+# appearance customization
+cask "font-hack-nerd-font" # nerd font with pretty icons
+
+# usability
+cask "alt-tab" # alt-tab windows like
+cask "karabiner-elements" # keyboard mappings
+cask "rectangle" # window manager
+
+# work related
+cask "alacritty" # terminal
+cask "visual-studio-code" # visual code
+
+# personal tools
+cask "thunderbird" # email client
 
