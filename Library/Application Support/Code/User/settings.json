@@ -64,7 +64,7 @@
   "terminal.integrated.defaultProfile.osx": "bash",
   "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.minimumContrastRatio": 1,
-  "terminal.external.osxExec": "Alacritty.app",
+  "terminal.integrated.cursorBlinking": true,
 
   // --------------------------------------------------
   // Formatter Settings
@@ -108,9 +108,13 @@
 
   // --------------------------------------------------
   // Misc Settings
-  "typescript.updateImportsOnFileMove.enabled": "never"
+  "typescript.updateImportsOnFileMove.enabled": "never",
 
   // --------------------------------------------------
   // Untracked Settings
   // ...
+  // Neovim plugin configuration
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  }
 }

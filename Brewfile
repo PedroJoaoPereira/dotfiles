@@ -12,6 +12,7 @@ brew "git" # version control
 brew "neovim" # text editor
 
 # personal tools
+brew "tmux" # terminal multiplexer
 brew "openssh" # ssh command
 brew "yadm" # dotfiles manager
 
