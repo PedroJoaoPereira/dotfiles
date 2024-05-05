@@ -1,13 +1,31 @@
+# source of true for homebrew
+
+# ----- ----- ----- -----
+
+# homebrew repositories
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
+
+# ----- ----- ----- -----
+# dependencies
+
+# node / work related
 brew "fnm"
 brew "hyperfine"
-brew "neofetch"
+brew "git"
 brew "neovim"
+
+# personal tools
 brew "openssh"
 brew "yadm"
 brew "zoxide"
 cask "alacritty"
+
+# misc
+brew "neofetch"
+
+# ----- ----- ----- -----
+# macos applications installed via homebrew
 cask "font-hack-nerd-font"
-cask "font-meslo-lg-nerd-font"
 cask "thunderbird"
+

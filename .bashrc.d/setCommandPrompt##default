@@ -3,18 +3,118 @@
 # source colors from another file
 source ~/.bashrc.d/baseTheme
 
-# set user @ host prompt
-user_details="${BOLD}${BRIGHT_CYAN}\u${RESET}${BRIGHT_BLUE}@\h"
+# ----- ----- ----- -----
 
-# set path prompt
-path_details="${BOLD}${BRIGHT_ORANGE}\w"
+# print the current branch name
+get_git_branch() {
+  # get current branch name and ignore errors if not in git directory
+  git_branch=$(git branch --show-current 2> /dev/null)
+  # output git branch if in a git directory
+  [[ -n ${git_branch} ]] && echo $git_branch 
+}
+
+# print the current untracked ot modified files
+get_git_dirty() {
+  # get current git state and ignore errors if not in git directory
+  git_state=$(git status --porcelain 2> /dev/null)
+  # output a symbol if git branch is dirty
+  [[ -n ${git_state} ]] && echo ' *'
+}
+
+# print the number of commits diff
+get_commit_numbers() {
+  # note the branches to compare
+  branch=$1
+  remote="$(git remote)/$branch"
+  
+  # commits diff
+  status=""
+  # commits behind
+  behind=$(git rev-list --count $branch..$remote 2> /dev/null)
+  # commits ahead
+  ahead=$(git rev-list --count $remote..$branch 2> /dev/null)
+
+  # add symbols showing diffs
+  [[ $behind > 0 ]] && status+='↓'
+  [[ $ahead > 0 ]] && status+='↑'
+
+  # output git commits if in a git directory
+  echo $status
+}
+
+get_git_details() {
+  # set git prompt colors
+  git_details_beginning="${RESET}${BRIGHT_PURPLE}↪[${BOLD}${BRIGHT_RED}"
+  git_details_ending="${RESET}${BRIGHT_PURPLE}]"
+  git_details_diff="${BRIGHT_CYAN}"
+  git_details_state="${BRIGHT_ORANGE}"
+
+  # git prompt
+  details=""
+  # validate if in git branch
+  git_branch=$(get_git_branch)
+  git_branch_truncated=$(echo $git_branch | sed 's/\(.\{20\}\).*/\1.../')
+  if [[ -n $git_branch ]]; then
+    git_number=$(get_commit_numbers ${git_branch})
+    # add branch name
+    details+=" ${git_details_beginning}${git_branch_truncated}${git_details_ending}"
+    # add diff details
+    if [[ -n $git_number ]]; then
+      details+=" ${git_details_diff}${git_number}"
+    fi
+    # add git state
+    details+="${git_details_state}\$(get_git_dirty)"
+  fi
+
+  # output git details
+  echo "${details}"
+}
 
 # set return code prompt
-return_details="\$(if [ \$? -eq 0 ]; then echo \"${BRIGHT_GREEN}\"; else echo \"${BRIGHT_RED}\"; fi)→"
+get_return_details() {
+  # set return prompt
+  return_details_beginning="${BOLD}"
+  return_details_success="${BRIGHT_GREEN}"
+  return_details_failure="${BRIGHT_RED}"
+  return_details_symbol="→"
+  return_details_ending="${RESET}"
 
-# set prompt reset
-reset_details="${RESET}"
+  # return prompt
+  details="${return_details_beginning}"
+  # validate which return code
+  if [[ $1 -eq 0 ]]; then
+    details+="${return_details_success}"
+  else
+    details+="${return_details_failure}"
+  fi
+  details+="${return_details_symbol}${return_details_ending}"
 
-# set bash prompt
-PS1="${user_details} ${path_details} ${return_details} ${reset_details}"
+  # output return details
+  echo "${details}"
+}
+
+# ----- ----- ----- -----
+
+# builds prompt function
+PROMPT_COMMAND=build_prompt
+build_prompt () {
+  # holds last exit code return
+  return_code=$?
+
+  # ----- ----- ----- -----
+
+  # set initial symbol
+  start_icon="${BRIGHT_PURPLE}➤"
+
+  # set path prompt
+  path_details="${BRIGHT_BLUE}\w"
+
+  # set prompt reset
+  reset_details="${RESET}"
+
+  # ----- ----- ----- -----
+
+  # set bash prompt
+  PS1="${start_icon} ${path_details}$(get_git_details) $(get_return_details ${return_code}) ${reset_details}"
+}
 
