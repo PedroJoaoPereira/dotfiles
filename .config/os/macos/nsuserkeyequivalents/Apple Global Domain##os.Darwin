@@ -1,0 +1,13 @@
+{
+    Back = "^\\U2190";
+    Close = "^w";
+    Copy = "^c";
+    Cut = "^x";
+    "Find..." = "^f";
+    Forward = "^\\U2192";
+    Paste = "^v";
+    "Print..." = "^p";
+    Redo = "^$z";
+    "Select All" = "^a";
+    Undo = "^z";
+}

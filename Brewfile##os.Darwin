@@ -1,13 +1,13 @@
-# source of true for homebrew
-
-# ----- ----- ----- -----
-
 # homebrew repositories
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
+tap "koekeishiya/formulae"
 
 # ----- ----- ----- -----
 # dependencies
+
+# keyboard shortcut daemon
+brew "koekeishiya/formulae/skhd"
 
 # node / work related
 brew "fnm"
@@ -30,6 +30,10 @@ brew  "gnupg"
 
 # terminal
 cask "alacritty"
+# alt-tab windows like
+cask "alt-tab"
+# cheatsheet app to show shortcuts
+cask "cheatsheet"
 # nerd font with pretty icons
 cask "font-hack-nerd-font"
 # window manager
@@ -38,4 +42,6 @@ cask "rectangle"
 cask "thunderbird"
 # keyboard layout overwrite
 cask "ukelele"
+# visual code
+cask "visual-studio-code"
 

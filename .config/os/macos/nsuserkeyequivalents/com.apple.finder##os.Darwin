@@ -1,0 +1,25 @@
+{
+    Applications = "\\Uf704";
+    Back = "^\\U2190";
+    "Close Window" = "^w";
+    Copy = "^c";
+    Cut = "^x";
+    Desktop = "\\Uf708";
+    Documents = "\\Uf705";
+    Downloads = "\\Uf706";
+    "Enclosing Folder" = "^\\U2191";
+    Find = "^f";
+    Forward = "^\\U2192";
+    Home = "\\Uf707";
+    "New Finder Window" = "^$n";
+    "New Folder" = "^n";
+    Paste = "^v";
+    Recents = "\\Uf709";
+    Redo = "^$z";
+    "Select All" = "^a";
+    Undo = "^z";
+    "as Columns" = "^3";
+    "as Gallery" = "^4";
+    "as Icons" = "^1";
+    "as List" = "^2";
+}

@@ -1,0 +1,11 @@
+{
+    Close = "^w";
+    "Close All" = "^$w";
+    Copy = "^c";
+    Cut = "^x";
+    Paste = "^v";
+    "Paste and Match Style" = "^$v";
+    Redo = "^$z";
+    "Select All" = "^a";
+    Undo = "^z";
+}

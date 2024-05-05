@@ -6,6 +6,8 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # add homebrew to the PATH
 export PATH="/opt/homebrew/bin:$PATH"
 
+# start skhd daemon service for keyboard shortcuts
+skhd --start-service
 # add zoxide to shell - a smarter cd
 eval "$(zoxide init --cmd cd bash)"
 # add fnm to shell - fast node manager
