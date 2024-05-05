@@ -15,7 +15,7 @@ rm -rf ~/.zshrc*
 
 # stow the zshrc from the parent directory of this script
 echo "install_zsh >> Stowing zshrc"
-(cd "$(dirname -- "$scriptPath")/.." && stow -t ~ zshrc/)
+(cd "$(dirname -- "$scriptPath")/../stowed" && stow -t ~ zshrc/)
 
 # reloads zsh shell
 echo "install_zsh >> Reloading zsh"
