@@ -20,3 +20,7 @@ Take into account that the content passed in the write needs to be single quoted
 defaults find NSUserKeyEquivalents
 ```
 
+---
+
+Source: https://apple.stackexchange.com/a/445233
+
