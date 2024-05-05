@@ -13,10 +13,7 @@ eval "$(zoxide init --cmd cd bash)"
 # add fnm to shell - fast node manager
 eval "$(fnm env)"
 
-# set command prompt
-#source ~/.bashrc.d/setCommandPrompt
-
-# temp alias
+# alias
 alias ls='eza --long --icons=always --all --git' # alias for ls with eza
 alias vi='nvim' # alias for neovim
 

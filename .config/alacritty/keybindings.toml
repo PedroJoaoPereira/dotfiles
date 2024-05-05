@@ -1,0 +1,7 @@
+# custom bindings
+
+[mouse]
+bindings = [
+  { mouse = "Right", action = "Paste" }, # Right click to paste
+]
+
