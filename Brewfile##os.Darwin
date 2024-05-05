@@ -19,14 +19,23 @@ brew "neovim"
 brew "openssh"
 brew "yadm"
 brew "zoxide"
-cask "alacritty"
 
 # misc
 brew "neofetch"
 brew "ripgrep"
+brew  "gnupg"
 
 # ----- ----- ----- -----
 # macos applications installed via homebrew
+
+# terminal
+cask "alacritty"
+# nerd font with pretty icons
 cask "font-hack-nerd-font"
+# window manager
+cask "rectangle"
+# email client
 cask "thunderbird"
+# keyboard layout overwrite
+cask "ukelele"
 
