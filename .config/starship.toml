@@ -1,0 +1,33 @@
+# starship prompt customization
+# https://starship.rs/config/
+
+# inserts a blank line between shell prompts
+add_newline = false
+
+# set color palette
+#palette = 'tokyo-night'
+
+# define color palette
+#[palettes.tokyo-night]
+
+# customize prompt
+format = """
+[▶ ](purple)\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$character
+"""
+
+# https://starship.rs/config/#directory
+[directory]
+truncate_to_repo = false
+
+# https://starship.rs/config/#git-branch
+[git_branch]
+format = '[$symbol\[$branch(:$remote_branch)\]]($style) '
+symbol = '↪'
+

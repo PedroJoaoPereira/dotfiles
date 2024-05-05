@@ -6,19 +6,20 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # add homebrew to the PATH
 export PATH="/opt/homebrew/bin:$PATH"
 
-# start skhd daemon service for keyboard shortcuts
-skhd --start-service
+# add starship prompt customization
+eval "$(starship init bash)"
 # add zoxide to shell - a smarter cd
 eval "$(zoxide init --cmd cd bash)"
 # add fnm to shell - fast node manager
 eval "$(fnm env)"
 
 # set command prompt
-source ~/.bashrc.d/setCommandPrompt
+#source ~/.bashrc.d/setCommandPrompt
 
 # temp alias
-alias ll='ls -la'
-alias v='nvim'
+alias ls='eza --long --icons=always --all --git' # alias for ls with eza
+alias vi='nvim' # alias for neovim
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'

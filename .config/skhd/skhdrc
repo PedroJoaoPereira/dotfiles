@@ -1,7 +1,0 @@
-# skhd daemon configuration file
-
-# open browser
-cmd - b : /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
-# open terminal
-cmd - t : /Applications/Alacritty.app/Contents/MacOS/alacritty
-
