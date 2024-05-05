@@ -17,8 +17,7 @@ import = [
 # windows appearance customization
 [window]
 padding = { x = 15, y = 15 }
-opacity = 0.95
-option_as_alt = "Both"
+option_as_alt = "OnlyLeft"
 
 # ----- ----- ----- -----
 

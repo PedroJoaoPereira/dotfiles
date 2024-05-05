@@ -18,6 +18,7 @@ brew "yadm" # dotfiles manager
 
 # enhanced tools
 brew "eza" # enchanced ls command
+brew "fzf" # enhanced fuzzyfinder - used by tmux and neovim
 brew "ripgrep" # enhanced grep command - used by telescope.nvim
 brew "zoxide" # enhanced cd command
 
