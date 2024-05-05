@@ -4,8 +4,8 @@
 source ~/.bashrc.d/baseTheme
 
 # ----- ----- ----- -----
+# auxiliary git functions
 
-# print the current branch name
 get_git_branch() {
   # get current branch name and ignore errors if not in git directory
   git_branch=$(git branch --show-current 2> /dev/null)
@@ -13,34 +13,34 @@ get_git_branch() {
   [[ -n ${git_branch} ]] && echo $git_branch 
 }
 
-# print the current untracked ot modified files
-get_git_dirty() {
-  # get current git state and ignore errors if not in git directory
-  git_state=$(git status --porcelain 2> /dev/null)
-  # output a symbol if git branch is dirty
-  [[ -n ${git_state} ]] && echo ' *'
-}
-
-# print the number of commits diff
-get_commit_numbers() {
-  # note the branches to compare
-  branch=$1
+get_git_diff() {
+  # branches to compare
+  branch=$1 # current local branch
   remote="$(git remote)/$branch"
   
-  # commits diff
-  status=""
   # commits behind
   behind=$(git rev-list --count $branch..$remote 2> /dev/null)
   # commits ahead
   ahead=$(git rev-list --count $remote..$branch 2> /dev/null)
 
   # add symbols showing diffs
-  [[ $behind > 0 ]] && status+='↓'
-  [[ $ahead > 0 ]] && status+='↑'
+  detais=""
+  [[ $behind > 0 ]] && details+='↓'
+  [[ $ahead > 0 ]] && details+='↑'
 
-  # output git commits if in a git directory
-  echo $status
+  # output git diff if in a git directory
+  echo $details
 }
+
+get_git_changes() {
+  # get current changes and ignore errors if not in git directory
+  git_changes=$(git status --porcelain 2> /dev/null)
+  # output a symbol if git branch has changes
+  [[ -n ${git_changes} ]] && echo ' *'
+}
+
+# ----- ----- ----- -----
+# prompt building functions
 
 get_git_details() {
   # set git prompt colors
@@ -49,30 +49,33 @@ get_git_details() {
   git_details_diff="${BRIGHT_CYAN}"
   git_details_state="${BRIGHT_ORANGE}"
 
+  # current git branch
+  git_branch=$(get_git_branch)
+  git_branch_truncated=$(echo $git_branch | sed 's/\(.\{20\}\).*/\1.../')
+
   # git prompt
   details=""
   # validate if in git branch
-  git_branch=$(get_git_branch)
-  git_branch_truncated=$(echo $git_branch | sed 's/\(.\{20\}\).*/\1.../')
   if [[ -n $git_branch ]]; then
-    git_number=$(get_commit_numbers ${git_branch})
+    # git diff number
+    git_number=$(get_git_diff ${git_branch})
+
     # add branch name
     details+=" ${git_details_beginning}${git_branch_truncated}${git_details_ending}"
-    # add diff details
+    # add diff number details
     if [[ -n $git_number ]]; then
       details+=" ${git_details_diff}${git_number}"
     fi
-    # add git state
-    details+="${git_details_state}\$(get_git_dirty)"
+    # add git changes
+    details+="${git_details_state}\$(get_git_changes)"
   fi
 
   # output git details
   echo "${details}"
 }
 
-# set return code prompt
 get_return_details() {
-  # set return prompt
+  # set return prompt colors
   return_details_beginning="${BOLD}"
   return_details_success="${BRIGHT_GREEN}"
   return_details_failure="${BRIGHT_RED}"
