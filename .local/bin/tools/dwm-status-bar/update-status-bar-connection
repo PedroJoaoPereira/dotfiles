@@ -1,0 +1,21 @@
+#!/bin/sh
+
+THIS_SPACING=" "
+
+THIS_CONNECTION_NAME=$(nmcli -t -f NAME c show --active | head -n 1)
+THIS_CONNECTION_DATA=""
+# detect connection changes
+if [ "$THIS_CONNECTION_NAME" == "lo" ]; then
+    # if no connection
+    THIS_CONNECTION_DATA=""
+
+elif echo "$THIS_CONNECTION_NAME" | grep -iq "wired"; then
+    # if wired connection
+    THIS_CONNECTION_DATA="Eth${THIS_SPACING}"
+
+else
+    # if wireless
+    THIS_CONNECTION_DATA="${THIS_CONNECTION_NAME}${THIS_SPACING}󰖩"
+fi
+
+export THIS_STATUS_CONNECTION="${THIS_CONNECTION_DATA}"

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+THIS_SPACING=" "
+
+THIS_AC_ADAPTER=$(acpitool | grep adapter | awk '{print $NF}')
+THIS_BATTERY=$(acpitool -b | grep -o ', .*,' | grep -o '\w*' | head -n 1)
+THIS_BATTERY_DATA=""
+# detect battery percentage
+if [ "$THIS_AC_ADAPTER" == "online" ]; then
+    # if on AC
+    THIS_BATTERY_DATA=""
+elif [ "$THIS_AC_ADAPTER" == "off-line" ]; then
+    # get battery as number
+    THIS_BATTERY_NUMBER=$(expr $THIS_BATTERY)
+    if [ $THIS_BATTERY_NUMBER -gt 95 ]; then
+        THIS_BATTERY_DATA=""
+    elif [ $THIS_BATTERY_NUMBER -gt 75 ]; then
+        THIS_BATTERY_DATA="${THIS_BATTERY}%${THIS_SPACING}"
+    elif [ $THIS_BATTERY_NUMBER -gt 50 ]; then
+        THIS_BATTERY_DATA="${THIS_BATTERY}%${THIS_SPACING}"
+    elif [ $THIS_BATTERY_NUMBER -gt 25 ]; then
+        THIS_BATTERY_DATA="${THIS_BATTERY}%${THIS_SPACING}"
+    elif [ $THIS_BATTERY_NUMBER -gt 10 ]; then
+        THIS_BATTERY_DATA="${THIS_BATTERY}%${THIS_SPACING}"
+    else
+        THIS_BATTERY_DATA="${THIS_BATTERY}%${THIS_SPACING}"
+    fi
+fi
+
+export THIS_STATUS_ENERGY="${THIS_BATTERY_DATA}"

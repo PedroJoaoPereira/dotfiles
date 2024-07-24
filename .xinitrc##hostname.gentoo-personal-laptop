@@ -1,0 +1,19 @@
+# set keyboard layout to portuguese
+setxkbmap pt
+
+# set monitor settings
+xrandr -s 1920x1080 -r 48
+# set mouse properties
+xinput set-prop "DELL08B8:00 0488:121F Touchpad" "libinput Tapping Enabled" 1
+xinput set-prop "DELL08B8:00 0488:121F Touchpad" "libinput Natural Scrolling Enabled" 1
+
+# set up audio server
+start-pipewire
+
+# set wallpaper
+feh --bg-fill --randomize ~/.config/wallpaper/*
+# set up status bar
+status-bar &
+# start dwm
+exec dbus-launch --sh-syntax --exit-with-session dwm
+

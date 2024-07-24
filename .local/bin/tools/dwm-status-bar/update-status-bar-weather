@@ -1,0 +1,28 @@
+#!/bin/sh
+
+THIS_ATTEMPTS_COUNTER=0
+THIS_ATTEMPTS_MAX_NUM=5
+
+THIS_DATA=""
+
+# retry get weather THIS_ATTEMPTS_MAX_NUM times
+while [ $THIS_ATTEMPTS_COUNTER -lt $THIS_ATTEMPTS_MAX_NUM ]; do
+    # check for internet connectivity
+    ping -c 1 gentoo.org >/dev/null 2>&1
+    # with internet
+    if [ $? -eq 0 ]; then
+        # fetch weather
+        THIS_DATA=$(curl -s 'https://wttr.in/Lousada?format="%t"' | sed 's/[\"\+]//g')
+        # with valid result
+        if [ $? -eq 0 ]; then
+            break
+        fi
+    fi
+    # update attempt counter
+    THIS_ATTEMPTS_COUNTER=$((THIS_ATTEMPTS_COUNTER + 1))
+    # wait for next attempt
+    sleep 1
+done
+
+# export weather data or empty string
+export THIS_STATUS_WEATHER=$THIS_DATA

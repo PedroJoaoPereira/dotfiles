@@ -1,0 +1,16 @@
+#!/bin/sh
+
+THIS_SPACING=" "
+
+THIS_AUDIO_MUTED=$(wpctl get-volume @DEFAULT_SINK@ | grep MUTED)
+THIS_AUDIO_LEVEL=$(wpctl get-volume @DEFAULT_SINK@ | awk '{print $NF}')
+THIS_AUDIO_DATA=""
+# detect volume level
+if [ "$THIS_AUDIO_MUTED" == "" ]; then
+    THIS_AUDIO_DATA="$(echo "$THIS_AUDIO_LEVEL * 100" | bc -l | grep -o "^\w*" | sed 's/$/%/g')${THIS_SPACING}"
+else
+    # no audio
+    THIS_AUDIO_DATA=""
+fi
+
+export THIS_STATUS_AUDIO="${THIS_AUDIO_DATA}"
