@@ -29,7 +29,7 @@ trap ". update-status-bar-backlight ; . update-status-bar" "RTMIN+1" # m = 35, u
 . update-status-bar-time
 . update-status-bar
 
-THIS_WAIT_INTERVAL=1
+THIS_WAIT_INTERVAL=15
 THIS_MIN_COUNTER=0
 while true; do
 	sleep $THIS_WAIT_INTERVAL &

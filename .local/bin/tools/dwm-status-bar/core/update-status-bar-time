@@ -1,5 +1,5 @@
 #!/bin/sh
 
-THIS_SPACING="  "
+THIS_SPACING=" "
 
 export THIS_STATUS_TIME=$(date "+%a${THIS_SPACING}%d-%b-%y${THIS_SPACING}%H:%M")
