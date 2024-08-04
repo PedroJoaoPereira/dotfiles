@@ -21,11 +21,11 @@ trap ". update-status-bar-audio ; . update-status-bar" "RTMIN+0"     # m = 34, u
 trap ". update-status-bar-backlight ; . update-status-bar" "RTMIN+1" # m = 35, update backlight
 
 # initialize bar with values
-. update-status-bar-backlight
 . update-status-bar-weather
 . update-status-bar-audio
-. update-status-bar-connection
+. update-status-bar-backlight
 . update-status-bar-energy
+. update-status-bar-connection
 . update-status-bar-time
 . update-status-bar
 
@@ -44,14 +44,14 @@ while true; do
 			. update-status-bar-weather
 		fi
 
-		# update connection every 15 seconds
-		if [ $(($THIS_MIN_COUNTER % (15 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
-			. update-status-bar-connection
-		fi
-
 		# update energy every 15 seconds
 		if [ $(($THIS_MIN_COUNTER % (15 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
 			. update-status-bar-energy
+		fi
+
+		# update connection every 15 seconds
+		if [ $(($THIS_MIN_COUNTER % (15 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
+			. update-status-bar-connection
 		fi
 
 		# update time every minute

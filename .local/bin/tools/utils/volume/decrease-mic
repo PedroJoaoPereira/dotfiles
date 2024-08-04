@@ -1,0 +1,16 @@
+#!/bin/sh
+
+THIS_MIC_STEP=5
+
+# get this mic level
+THIS_MIC_LEVEL=$(echo "$(wpctl get-volume @DEFAULT_SOURCE@ | awk '{print $NF}') * 100" | bc -l | grep -o "^\w*")
+
+# get the new mic level
+THIS_NEW_MIC_LEVEL=$(($THIS_MIC_LEVEL - $THIS_MIC_STEP))
+# clip it to min 0
+THIS_NEW_MIC_LEVEL=$(($THIS_NEW_MIC_LEVEL < 0 ? 0 : $THIS_NEW_MIC_LEVEL))
+
+# set new mic level
+wpctl set-volume @DEFAULT_SOURCE@ $THIS_NEW_MIC_LEVEL%
+# refresh status bar
+refresh-status-bar-audio

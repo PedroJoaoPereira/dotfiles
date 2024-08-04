@@ -2,8 +2,24 @@
 
 THIS_SPACING=" "
 
-THIS_AUDIO_MUTED=$(wpctl get-volume @DEFAULT_SINK@ | grep MUTED)
-THIS_AUDIO_LEVEL=$(wpctl get-volume @DEFAULT_SINK@ | awk '{print $NF}')
+THIS_MIC=$(wpctl get-volume @DEFAULT_SOURCE@)
+THIS_AUDIO=$(wpctl get-volume @DEFAULT_SINK@)
+
+THIS_MIC_MUTED=$(echo $THIS_MIC | grep MUTED)
+THIS_MIC_LEVEL=$(echo $THIS_MIC | awk '{print $NF}')
+
+THIS_AUDIO_MUTED=$(echo $THIS_AUDIO | grep MUTED)
+THIS_AUDIO_LEVEL=$(echo $THIS_AUDIO | awk '{print $NF}')
+
+THIS_MIC_DATA=""
+# detect mic level
+if [ "$THIS_MIC_MUTED" == "" ]; then
+    THIS_MIC_DATA="$(echo "$THIS_MIC_LEVEL * 100" | bc -l | grep -o "^\w*" | sed 's/$/%/g')${THIS_SPACING}${THIS_SPACING}"
+else
+    # no mic
+    THIS_MIC_DATA="${THIS_SPACING}${THIS_SPACING}"
+fi
+
 THIS_AUDIO_DATA=""
 # detect volume level
 if [ "$THIS_AUDIO_MUTED" == "" ]; then
@@ -13,4 +29,4 @@ else
     THIS_AUDIO_DATA=""
 fi
 
-export THIS_STATUS_AUDIO="${THIS_AUDIO_DATA}"
+export THIS_STATUS_AUDIO="${THIS_MIC_DATA}${THIS_AUDIO_DATA}"
