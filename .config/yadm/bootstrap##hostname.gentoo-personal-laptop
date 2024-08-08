@@ -2,11 +2,9 @@
 
 THIS_HOME_DIR=/home/chuck
 
-# stow root symlinks
-cd ${THIS_HOME_DIR}/.config/stow/root
-doas stow -v -D . --target=/
-doas stow -v . --target=/ --adopt
+# symlink all user bin to user directory in path
+${THIS_HOME_DIR}/.local/bin/tools/utils/symlinks/refresh-user-bin-links
 
-# symlink all custom tools recursively
-find ${THIS_HOME_DIR}/.local/bin -maxdepth 1 -type l -delete
-find ${THIS_HOME_DIR}/.local/bin/tools/ -type f -exec ln -sfv "{}" ~/.local/bin/ ';'
+# symlink resources to root folder
+doas refresh-root-links
+
