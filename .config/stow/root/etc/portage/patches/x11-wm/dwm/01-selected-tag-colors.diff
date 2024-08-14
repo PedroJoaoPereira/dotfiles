@@ -1,8 +1,8 @@
 diff --git a/dwm.c b/dwm.c
-index d41cc14..8b0c990 100644
+index 65ebafc..97f171e 100644
 --- a/dwm.c
 +++ b/dwm.c
-@@ -741,7 +741,7 @@ drawbar(Monitor *m)
+@@ -737,7 +737,7 @@ drawbar(Monitor *m)
  
  	if ((w = m->ww - tw - x) > bh) {
  		if (m->sel) {

@@ -1,0 +1,112 @@
+diff --git a/config.def.h b/config.def.h
+index 6ba063c..0f2aecc 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -27,9 +27,9 @@ static const Rule rules[] = {
+ 	 *	WM_CLASS(STRING) = instance, class
+ 	 *	WM_NAME(STRING) = title
+ 	 */
+-	/* class      instance    title       tags mask     isfloating   monitor */
+-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
++	/* class      instance    title       tags mask     isfloating		isbordered		isgapped	monitor */
++	{ "Gimp",     NULL,       NULL,       0,            1,				0,				0,			-1 },
++	{ "Firefox",  NULL,       NULL,       1 << 8,       0,				0,				0,			-1 },
+ };
+ 
+ /* layout(s) */
+diff --git a/dwm.c b/dwm.c
+index 51ae94b..88e7f19 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -93,7 +93,7 @@ struct Client {
+ 	int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
+ 	int bw, oldbw;
+ 	unsigned int tags;
+-	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
++	int isfixed, isfloating, isbordered, isgapped, isurgent, neverfocus, oldstate, isfullscreen;
+ 	Client *next;
+ 	Client *snext;
+ 	Monitor *mon;
+@@ -139,6 +139,8 @@ typedef struct {
+ 	const char *title;
+ 	unsigned int tags;
+ 	int isfloating;
++	int isbordered;
++	int isgapped;
+ 	int monitor;
+ } Rule;
+ 
+@@ -287,6 +289,8 @@ applyrules(Client *c)
+ 
+ 	/* rule matching */
+ 	c->isfloating = 0;
++	c->isbordered = 0;
++	c->isgapped = 0;
+ 	c->tags = 0;
+ 	XGetClassHint(dpy, c->win, &ch);
+ 	class    = ch.res_class ? ch.res_class : broken;
+@@ -299,6 +303,8 @@ applyrules(Client *c)
+ 		&& (!r->instance || strstr(instance, r->instance)))
+ 		{
+ 			c->isfloating = r->isfloating;
++			c->isbordered = r->isbordered;
++			c->isgapped = r->isgapped;
+ 			c->tags |= r->tags;
+ 			for (m = mons; m && m->num != r->monitor; m = m->next);
+ 			if (m)
+@@ -1696,17 +1702,14 @@ tagmon(const Arg *arg)
+ void
+ tile(Monitor *m)
+ {
+-	unsigned int i, n, h, mw, my, ty, bw, g;
++	unsigned int i, n, h, mw, my, ty, bw = 0, g = 0;
+ 	Client *c;
+ 
+ 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+ 	if (n == 0)
+ 		return;
+ 
+-	if (n == 1) {
+-		bw = 0;
+-		g = 0;
+-	} else {
++	if (n > 1) {
+ 		bw = borderpx;
+ 		g = gappx;
+ 	}
+@@ -1714,18 +1717,29 @@ tile(Monitor *m)
+  		mw = m->nmaster ? (m->ww - g) * m->mfact : 0;
+ 	else
+  		mw = m->ww - g;
+- 	for (i = 0, my = ty = g, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
++ 	for (i = 0, my = ty = g, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
++		if (n == 1 && c->isbordered)
++			bw = borderpx;
++		if (n == 1 && c->isgapped) {
++			g = gappx;
++			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - 2*g;
++			resize(c, m->wx + g, m->wy + my + g, mw - 2*bw - 2*g, h - 2*bw, bw, 0);
++			if (my + HEIGHT(c) + g < m->wh)
++				my += HEIGHT(c) + g;
++			continue;
++		}
+ 		if (i < m->nmaster) {
+- 			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - g;
+- 			resize(c, m->wx + g, m->wy + my, mw - 2*bw - g, h - 2*bw, bw, 0);
++			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - g;
++			resize(c, m->wx + g, m->wy + my, mw - 2*bw - g, h - 2*bw, bw, 0);
+ 			if (my + HEIGHT(c) + g < m->wh)
+ 				my += HEIGHT(c) + g;
+ 		} else {
+- 			h = (m->wh - ty) / (n - i) - g;
+- 			resize(c, m->wx + mw + g, m->wy + ty, m->ww - mw - 2*bw - 2*g, h - 2*bw, bw, 0);
++			h = (m->wh - ty) / (n - i) - g;
++			resize(c, m->wx + mw + g, m->wy + ty, m->ww - mw - 2*bw - 2*g, h - 2*bw, bw, 0);
+ 			if (ty + HEIGHT(c) + g < m->wh)
+ 				ty += HEIGHT(c) + g;
+ 		}
++	}
+ }
+ 
+ void

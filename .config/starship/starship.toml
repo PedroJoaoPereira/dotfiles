@@ -21,7 +21,7 @@ only_attached = true
 
 # https://starship.rs/config/#git-commit
 [git_commit]
-format = '[$hash](purple)[$tag]($style)'
+format = '[$hash](purple)[$tag]($style) '
 style = 'bold purple'
 tag_disabled = false
 tag_symbol = ' '

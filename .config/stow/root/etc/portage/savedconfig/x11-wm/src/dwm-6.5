@@ -1,35 +1,40 @@
+// colors
+#define COL_BLACK "#000000"
+#define COL_WHITE "#ffffff"
+
+#define COL_ACCENT_DARKER "#004fe1"
+#define COL_ACCENT_DARK "#08a1f7"
+#define COL_ACCENT_LIGHT "#03c1f4"
+#define COL_ACCENT_LIGHTER "#09e0fe"
+
 // global properties
-static const unsigned int borderpx = 0; // border px of windows
+static const unsigned int borderpx = 2; // border px of windows
+static const unsigned int gappx = 16;   // gap pixel between windows
 static const unsigned int snap = 32;    // snap pixel
 static const int showbar = 1;           // show status bar
 static const int topbar = 0;            // status bar position - 0 bottom, 1 top
 static const char *fonts[] = {"UbuntuMono Nerd Font:size=10", "monospace:size=10"};
+
+// dmenu properties
+static char dmenumon[2] = "0"; // required by dwm spawn for dmenu
 static const char dmenufont[] = "UbuntuMono Nerd Font:size=10";
-
-// colors
-static const char colNull[] = "#000000";
-static const char colBgPrimary[] = "#000000";
-static const char colBgSecondary[] = "#004fe1";
-static const char colFgPrimary[] = "#ffffff";
-
-static const char col_gray1[] = "#222222";
-static const char col_gray2[] = "#444444";
-static const char col_gray3[] = "#bbbbbb";
-static const char col_gray4[] = "#eeeeee";
-static const char col_cyan[] = "#005577";
+static const char dmenuBg[] = COL_BLACK;
+static const char dmenuBgSelected[] = COL_ACCENT_DARKER;
+static const char dmenuFg[] = COL_WHITE;
+static const char dmenuFgSelected[] = COL_WHITE;
 
 // window colors
 static const char *colors[][3] = {
     // fg, bg, border
-    [SchemeNorm] = {colFgPrimary, colBgPrimary, colNull},  // for all windows not selected
-    [SchemeSel] = {colFgPrimary, colBgSecondary, colNull}, // for all selected windows
+    [SchemeNorm] = { COL_WHITE, COL_BLACK, COL_BLACK },  // for all windows not selected
+    [SchemeSel] = { COL_WHITE, COL_ACCENT_DARKER, COL_ACCENT_DARK }, // for all selected windows
 };
 
 // tagging
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 // layouts
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -41,67 +46,88 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 };
 
-// commands
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL};
-static const char *termcmd[] = {"st", NULL};
-
 // key definition
-#define MODKEY Mod4Mask // super key
-#define ALTLKEY Mod1Mask // left alt key
-#define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, // for moving to tags and windows to tags
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } } // for spawning shell commands
+#define SHIFT ShiftMask // Shift key
+#define CAPS LockMask // Caps lock
+#define CTRL ControlMask // Control key
+#define ALT Mod1Mask // Alt key
+#define NUM Mod2Mask // Num lock
+#define SCROLL Mod3Mask // Scroll lock
+#define SUPER Mod4Mask // Windows key
 
-// key bindings / shortcuts
+// applications definition
+#define SHCMD(cmd) { .v = (const char*[]){ "sh", "-c", cmd, NULL } } // for spawning shell commands
+#define TERMCMD(cmd) { .v = (const char*[]){ "st", "-e", cmd, NULL } } // for spawning shell commands
+static const char *termcmd[] = {"st", NULL};
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", dmenuBg, "-nf", dmenuFg, "-sb", dmenuBgSelected, "-sf", dmenuFgSelected, NULL };
+
+// tag interactions definition
+#define TAGKEYS(KEY,TAG) \
+	{ SUPER,				KEY,						view,           {.ui = 1 << TAG} }, /* super + num -- move to tag */ 					\
+	{ SUPER|SHIFT,			KEY,						tag,            {.ui = 1 << TAG} }, /* super + shift + num -- move window to tag */ 	\
+	{ SUPER|CTRL,           KEY,						toggleview,     {.ui = 1 << TAG} }, /* super + ctrl + num -- toggle tag into view */
+#define ALLTAGS /* define key binding interactions for all the tags */ \
+	TAGKEYS(XK_1, 0) \
+	TAGKEYS(XK_2, 1) \
+	TAGKEYS(XK_3, 2) \
+	TAGKEYS(XK_4, 3) \
+	TAGKEYS(XK_5, 4) \
+	TAGKEYS(XK_6, 5) \
+	TAGKEYS(XK_7, 6) \
+	TAGKEYS(XK_8, 7) \
+	TAGKEYS(XK_9, 8)
+
+// kbindings / shortcuts
 static const Key keys[] = {
+	// type					modifier		key				function / argument
+	// applications
+	{ SUPER,				XK_r,						spawn,          {.v = dmenucmd } }, // super + r -- dmenu
+	{ SUPER,				XK_Return,					spawn,          {.v = termcmd } }, // super + enter -- st
+	{ CTRL|SHIFT,			XK_Escape,					spawn,          TERMCMD("btop") }, // ctrl + shift + escape -- btop
+	// navigation
+	// functional
+	{ 0,					XF86XK_AudioMute,			spawn,          SHCMD("toggle-volume") }, // toggle audio
+	{ 0,					XF86XK_AudioLowerVolume,	spawn,          SHCMD("decrease-volume") }, // decrease volume level
+	{ 0,					XF86XK_AudioRaiseVolume,	spawn,          SHCMD("increase-volume") }, // increase volume level
+	{ 0,					XF86XK_AudioMicMute,		spawn,          SHCMD("toggle-mic") }, // toggle mic
+	{ 0,					XF86XK_MonBrightnessDown,	spawn,          SHCMD("decrease-backlight") }, // decrease backlight level
+	{ 0,					XF86XK_MonBrightnessUp,		spawn,          SHCMD("increase-backlight") }, // increase backlight level
+	// admin
+	{ ALT,					XK_Tab,						view,           {0} }, // alt + tab -- change tag
+	{ SUPER,				XK_b,						togglebar,      {0} }, // super + b -- toggle bar
+	{ SUPER,				XK_q,						killclient,		{0} }, // super + q -- kill window
+	{ SUPER|SHIFT,			XK_q,						quit,			{0} }, // super + shift + q -- kill dwm
+	{ CTRL|ALT,				XK_Delete,					spawn,          SHCMD("doas reboot") }, // ctrl + shift + escape -- reboots system
+	{ CTRL|ALT,				XK_Return,					spawn,          SHCMD("doas shutdown -h now") }, // ctrl + shift + return -- shuts down system
+	// all tag interactions
+	ALLTAGS
+
 	// type       	modifier                      key        function        argument
-	{ MODKEY,						XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,			XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ ALTLKEY,                      XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ SUPER,                       XK_j,      focusstack,     {.i = +1 } },
+	{ SUPER,                       XK_k,      focusstack,     {.i = -1 } },
+	{ SUPER,                       XK_i,      incnmaster,     {.i = +1 } },
+	{ SUPER,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ SUPER,                       XK_h,      setmfact,       {.f = -0.05} },
+	{ SUPER,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ SUPER,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ SUPER,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ SUPER,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ SUPER,                       XK_space,  setlayout,      {0} },
+	{ SUPER|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ SUPER,                       XK_0,      view,           {.ui = ~0 } },
+	{ SUPER|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+	{ SUPER,                       XK_comma,  focusmon,       {.i = -1 } },
+	{ SUPER,                       XK_period, focusmon,       {.i = +1 } },
+	{ SUPER|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+	{ SUPER|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 };
 
 // window rules
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	// xprop | awk '/^WM_CLASS/{sub(/.* =/, "instance:"); sub(/,/, "\nclass:"); print} /^WM_NAME/{sub(/.* =/, "title:"); print}'
+
+	// class			instance    title       tags mask     isfloating		isbordered		isgapped	monitor */
+	{ "st-256color",	NULL,		NULL,       0,            0,				1,				1,			-1 },
 };
 
 /* button definitions */
@@ -112,85 +138,11 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+	{ ClkClientWin,         SUPER,         Button1,        movemouse,      {0} },
+	{ ClkClientWin,         SUPER,         Button2,        togglefloating, {0} },
+	{ ClkClientWin,         SUPER,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-};
-
-// dwmc script signaling methods
-// this file can be ignore from this point
-
-void
-setlayoutex(const Arg *arg)
-{
-	setlayout(&((Arg) { .v = &layouts[arg->i] }));
-}
-
-void
-viewex(const Arg *arg)
-{
-	view(&((Arg) { .ui = 1 << arg->ui }));
-}
-
-void
-viewall(const Arg *arg)
-{
-	view(&((Arg){.ui = ~0}));
-}
-
-void
-toggleviewex(const Arg *arg)
-{
-	toggleview(&((Arg) { .ui = 1 << arg->ui }));
-}
-
-void
-tagex(const Arg *arg)
-{
-	tag(&((Arg) { .ui = 1 << arg->ui }));
-}
-
-void
-toggletagex(const Arg *arg)
-{
-	toggletag(&((Arg) { .ui = 1 << arg->ui }));
-}
-
-void
-tagall(const Arg *arg)
-{
-	tag(&((Arg){.ui = ~0}));
-}
-
-/* signal definitions */
-/* signum must be greater than 0 */
-/* trigger signals using `xsetroot -name "fsignal:<signame> [<type> <value>]"` */
-static Signal signals[] = {
-	/* signum           function */
-	{ "focusstack",     focusstack },
-	{ "setmfact",       setmfact },
-	{ "togglebar",      togglebar },
-	{ "incnmaster",     incnmaster },
-	{ "togglefloating", togglefloating },
-	{ "focusmon",       focusmon },
-	{ "tagmon",         tagmon },
-	{ "zoom",           zoom },
-	{ "view",           view },
-	{ "viewall",        viewall },
-	{ "viewex",         viewex },
-	{ "toggleview",     view },
-	{ "toggleviewex",   toggleviewex },
-	{ "tag",            tag },
-	{ "tagall",         tagall },
-	{ "tagex",          tagex },
-	{ "toggletag",      tag },
-	{ "toggletagex",    toggletagex },
-	{ "killclient",     killclient },
-	{ "quit",           quit },
-	{ "setlayout",      setlayout },
-	{ "setlayoutex",    setlayoutex },
+	{ ClkTagBar,            SUPER,         Button1,        tag,            {0} },
+	{ ClkTagBar,            SUPER,         Button3,        toggletag,      {0} },
 };
