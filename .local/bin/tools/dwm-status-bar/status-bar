@@ -4,15 +4,6 @@
 mkdir -p ~/.cache
 printf "$$" >~/.cache/status-bar-pid
 
-# MODULES
-#update_cpu () {
-#cpu="$(grep -o "^[^ ]*" /proc/loadavg )"
-#}
-
-#update_memory () {
-#memory="$(free -h | sed -n "2s/\([^ ]* *\)\{2\}\([^ ]*\).*/\2/p")"
-#}
-
 # SIGNALLING
 # to update it from external commands
 ## kill -m "$(cat ~/.cache/pidofbar)"
@@ -22,6 +13,9 @@ trap ". update-status-bar-backlight ; . update-status-bar" "RTMIN+1" # m = 35, u
 
 # initialize bar with values
 . update-status-bar-weather
+# . update-status-bar-cpu
+# . update-status-bar-memory
+# . update-status-bar-disk
 . update-status-bar-audio
 . update-status-bar-backlight
 . update-status-bar-energy
@@ -29,7 +23,7 @@ trap ". update-status-bar-backlight ; . update-status-bar" "RTMIN+1" # m = 35, u
 . update-status-bar-time
 . update-status-bar
 
-THIS_WAIT_INTERVAL=15
+THIS_WAIT_INTERVAL=30
 THIS_MIN_COUNTER=0
 while true; do
 	sleep $THIS_WAIT_INTERVAL &
@@ -44,13 +38,28 @@ while true; do
 			. update-status-bar-weather
 		fi
 
-		# update energy every 15 seconds
-		if [ $(($THIS_MIN_COUNTER % (15 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
+		# update cpu every 30 seconds
+		# if [ $(($THIS_MIN_COUNTER % (30 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
+		# 	. update-status-bar-cpu
+		# fi
+
+		# update memory every 30 seconds
+		# if [ $(($THIS_MIN_COUNTER % (30 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
+		# 	. update-status-bar-memory
+		# fi
+
+		# update disk every hour
+		# if [ $(($THIS_MIN_COUNTER % (60 * 60 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
+		# 	. update-status-bar-disk
+		# fi
+
+		# update energy every 30 seconds
+		if [ $(($THIS_MIN_COUNTER % (30 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
 			. update-status-bar-energy
 		fi
 
-		# update connection every 15 seconds
-		if [ $(($THIS_MIN_COUNTER % (15 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
+		# update connection every 30 seconds
+		if [ $(($THIS_MIN_COUNTER % (30 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
 			. update-status-bar-connection
 		fi
 

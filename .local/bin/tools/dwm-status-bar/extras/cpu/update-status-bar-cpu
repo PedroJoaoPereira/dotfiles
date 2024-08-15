@@ -1,0 +1,10 @@
+#!/bin/sh
+
+THIS_CPU_LOAD=$(top -b -n2 | grep "Cpu(s)" | awk '{print $2+$4 "%"}' | tail -n1)
+
+THIS_CPU_DATA=""
+THIS_CPU_DATA+="${THIS_CPU_LOAD}"
+THIS_CPU_DATA+=" "
+THIS_CPU_DATA+=""
+
+export THIS_STATUS_CPU="${THIS_CPU_DATA}"

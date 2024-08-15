@@ -1,0 +1,16 @@
+#!/bin/sh
+
+THIS_USED_SIZE=$(df -h --total | tail -1 | awk {'printf $3'})
+THIS_TOTAL_SIZE=$( df -h --total | tail -1 | awk {'printf $2'})
+THIS_SIZE_PERCENTAGE=$(df -h --total | tail -1 | awk {'printf $5'})
+
+THIS_DISK_DATA=""
+THIS_DISK_DATA+="${THIS_USED_SIZE}"
+THIS_DISK_DATA+=" / "
+THIS_DISK_DATA+="${THIS_TOTAL_SIZE}"
+THIS_DISK_DATA+=" "
+THIS_DISK_DATA+="(${THIS_SIZE_PERCENTAGE})"
+THIS_DISK_DATA+=" "
+THIS_DISK_DATA+=""
+
+export THIS_STATUS_DISK="${THIS_DISK_DATA}"

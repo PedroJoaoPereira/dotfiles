@@ -1,7 +1,5 @@
 # set keyboard layout to portuguese
 setxkbmap pt
-# set up workaround for win key release
-#xcape -e 'Super_L=Super_L|r'
 
 # set monitor settings
 xrandr -s 1920x1080 -r 48

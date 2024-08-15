@@ -1,0 +1,3 @@
+#!/bin/sh
+
+export THIS_STATUS_TIME=$(date "+%a %d-%b-%y %H:%M")
