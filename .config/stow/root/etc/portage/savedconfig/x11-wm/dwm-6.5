@@ -13,11 +13,11 @@ static const unsigned int gappx = 16;   // gap pixel between windows
 static const unsigned int snap = 32;    // snap pixel
 static const int showbar = 1;           // show status bar
 static const int topbar = 0;            // status bar position - 0 bottom, 1 top
-static const char *fonts[] = {"UbuntuMono Nerd Font:size=10", "monospace:size=10"};
+static const char *fonts[] = { "Hack Nerd Font:size=8" };
 
 // dmenu properties
 static char dmenumon[2] = "0"; // required by dwm spawn for dmenu
-static const char dmenufont[] = "UbuntuMono Nerd Font:size=10";
+static const char dmenufont[] = "Hack Nerd Font:size=8";
 static const char dmenuBg[] = COL_BLACK;
 static const char dmenuBgSelected[] = COL_ACCENT_DARKER;
 static const char dmenuFg[] = COL_WHITE;
@@ -58,8 +58,8 @@ static const Layout layouts[] = {
 // applications definition
 #define SHCMD(cmd) { .v = (const char*[]){ "sh", "-c", cmd, NULL } } // for spawning shell commands
 #define TERMCMD(cmd) { .v = (const char*[]){ "st", "-e", cmd, NULL } } // for spawning shell commands
-static const char *termcmd[] = {"st", NULL};
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", dmenuBg, "-nf", dmenuFg, "-sb", dmenuBgSelected, "-sf", dmenuFgSelected, NULL };
+static const char *termcmd[] = {"st", NULL};
 
 // tag interactions definition
 #define TAGKEYS(KEY,TAG) \
@@ -83,8 +83,10 @@ static const Key keys[] = {
 	// applications
 	{ SUPER,				XK_r,						spawn,          {.v = dmenucmd } }, // super + r -- dmenu
 	{ SUPER,				XK_Return,					spawn,          {.v = termcmd } }, // super + enter -- st
+	{ SUPER|SHIFT,			XK_Return,					spawn,          TERMCMD("tmux") }, // super + shift + enter -- tmux
 	{ CTRL|SHIFT,			XK_Escape,					spawn,          TERMCMD("btop") }, // ctrl + shift + escape -- btop
 	// navigation
+	{ ALT,					XK_Tab,						view,           {0} }, // alt + tab -- change tag
 	// functional
 	{ 0,					XF86XK_AudioMute,			spawn,          SHCMD("toggle-volume") }, // toggle audio
 	{ 0,					XF86XK_AudioLowerVolume,	spawn,          SHCMD("decrease-volume") }, // decrease volume level
@@ -93,12 +95,12 @@ static const Key keys[] = {
 	{ 0,					XF86XK_MonBrightnessDown,	spawn,          SHCMD("decrease-backlight") }, // decrease backlight level
 	{ 0,					XF86XK_MonBrightnessUp,		spawn,          SHCMD("increase-backlight") }, // increase backlight level
 	// admin
-	{ ALT,					XK_Tab,						view,           {0} }, // alt + tab -- change tag
 	{ SUPER,				XK_b,						togglebar,      {0} }, // super + b -- toggle bar
 	{ SUPER,				XK_q,						killclient,		{0} }, // super + q -- kill window
-	{ SUPER|SHIFT,			XK_q,						quit,			{0} }, // super + shift + q -- kill dwm
-	{ CTRL|ALT,				XK_Delete,					spawn,          SHCMD("doas reboot") }, // ctrl + shift + escape -- reboots system
-	{ CTRL|ALT,				XK_Return,					spawn,          SHCMD("doas shutdown -h now") }, // ctrl + shift + return -- shuts down system
+	{ CTRL|ALT,				XK_Delete,					spawn,      	SHCMD("refresh-system") }, // ctrl + alt + delete -- restart all services
+	{ CTRL|SHIFT|ALT,		XK_Delete,					quit,			{0} }, // ctrl + shift + alt + delete -- restart dwm
+	{ CTRL|ALT,				XK_Return,					spawn,          SHCMD("doas reboot") }, // ctrl + alt + return -- reboot system
+	{ CTRL|SHIFT|ALT,		XK_Return,					spawn,          SHCMD("doas shutdown -h now") }, // ctrl + shift + alt + return -- shutdown system
 	// all tag interactions
 	ALLTAGS
 

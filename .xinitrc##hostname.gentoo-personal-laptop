@@ -7,11 +7,8 @@ numlockx
 xinput set-prop "DELL08B8:00 0488:121F Touchpad" "libinput Tapping Enabled" 1
 xinput set-prop "DELL08B8:00 0488:121F Touchpad" "libinput Natural Scrolling Enabled" 1
 
-# set monitor settings
-refresh-displays
-
-# set up audio server
-start-pipewire
+# set displays and audio settings
+refresh-system
 
 # set up status bar
 status-bar &

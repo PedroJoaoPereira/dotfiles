@@ -1,8 +1,0 @@
-#!/bin/sh
-
-THIS_DEPENDENCY_CATEGORY=x11-wm
-THIS_PORTAGE_SAVEDCONFIG_DIR=/etc/portage/savedconfig
-
-cp $(find "${THIS_PORTAGE_SAVEDCONFIG_DIR}/${THIS_DEPENDENCY_CATEGORY}/src/" -maxdepth 1 -type f) "${THIS_PORTAGE_SAVEDCONFIG_DIR}/${THIS_DEPENDENCY_CATEGORY}/"
-emerge --ask=n x11-wm/dwm
-
