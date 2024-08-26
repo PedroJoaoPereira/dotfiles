@@ -1,5 +1,5 @@
 diff --git a/dwm.c b/dwm.c
-index f1d86b2..65ebafc 100644
+index 1808d45..e29e411 100644
 --- a/dwm.c
 +++ b/dwm.c
 @@ -40,6 +40,7 @@

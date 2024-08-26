@@ -9,9 +9,10 @@ xinput set-prop "DELL08B8:00 0488:121F Touchpad" "libinput Natural Scrolling Ena
 
 # set displays and audio settings
 refresh-system
-
-# set up status bar
+# set notifications daemon
+dunst &
+# set status bar
 status-bar &
+
 # start dwm
 exec dbus-launch --sh-syntax --exit-with-session dwm
-

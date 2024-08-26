@@ -1,0 +1,63 @@
+diff --git a/config.def.h b/config.def.h
+index 20a0793..884a4be 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -93,6 +93,8 @@ static const Key keys[] = {
+ 	{ MODKEY,						XK_Left,   viewprev,	   {0} },
+ 	{ MODKEY|ShiftMask,				XK_Right,  tagtonext,	   {0} },
+ 	{ MODKEY|ShiftMask,				XK_Left,   tagtoprev,	   {0} },
++	{ MODKEY|ShiftMask,				XK_Up,	   tagnextmon,	   {0} },
++	{ MODKEY|ShiftMask,				XK_Down,   tagprevmon,	   {0} },
+ 	TAGKEYS(                        XK_1,                      0)
+ 	TAGKEYS(                        XK_2,                      1)
+ 	TAGKEYS(                        XK_3,                      2)
+diff --git a/dwm.c b/dwm.c
+index 9e7cf04..b2ff74a 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -218,6 +218,8 @@ static void showhide(Client *c);
+ static void spawn(const Arg *arg);
+ static void tag(const Arg *arg);
+ static void tagmon(const Arg *arg);
++static void tagnextmon(const Arg *arg);
++static void tagprevmon(const Arg *arg);
+ static void tagtonext(const Arg *arg);
+ static void tagtoprev(const Arg *arg);
+ static void tile(Monitor *m);
+@@ -1791,6 +1793,36 @@ tagmon(const Arg *arg)
+ 	sendmon(selmon->sel, dirtomon(arg->i));
+ }
+ 
++void
++tagnextmon(const Arg *arg)
++{
++	if (!selmon->sel || !mons->next)
++		return;
++	Client *sel = selmon->sel;
++	Monitor *newmon = dirtomon(1);
++	sendmon(sel, newmon);
++	if (arg->ui & TAGMASK) {
++		sel->tags = arg->ui & TAGMASK;
++		focus(NULL);
++		arrange(newmon);
++	}
++}
++
++void
++tagprevmon(const Arg *arg)
++{
++	if (!selmon->sel || !mons->next)
++		return;
++	Client *sel = selmon->sel;
++	Monitor *newmon = dirtomon(-1);
++	sendmon(sel, newmon);
++	if (arg->ui & TAGMASK) {
++		sel->tags = arg->ui & TAGMASK;
++		focus(NULL);
++		arrange(newmon);
++	}
++}
++
+ void
+ tagtonext(const Arg *arg)
+ {

@@ -23,7 +23,7 @@ trap ". update-status-bar-backlight ; . update-status-bar" "RTMIN+1" # m = 35, u
 . update-status-bar-time
 . update-status-bar
 
-THIS_WAIT_INTERVAL=20
+THIS_WAIT_INTERVAL=30
 THIS_MIN_COUNTER=0
 while true; do
 	sleep $THIS_WAIT_INTERVAL &
@@ -33,8 +33,8 @@ while true; do
 			let THIS_MIN_COUNTER=0
 		fi
 
-		# update weather every 20 minutes
-		if [ $(($THIS_MIN_COUNTER % (20 * 60 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
+		# update weather every 15 minutes
+		if [ $(($THIS_MIN_COUNTER % (15 * 60 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
 			. update-status-bar-weather
 		fi
 
@@ -53,13 +53,13 @@ while true; do
 		# 	. update-status-bar-disk
 		# fi
 
-		# update energy every 20 seconds
-		if [ $(($THIS_MIN_COUNTER % (20 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
+		# update energy every 30 seconds
+		if [ $(($THIS_MIN_COUNTER % (30 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
 			. update-status-bar-energy
 		fi
 
-		# update connection every 20 seconds
-		if [ $(($THIS_MIN_COUNTER % (20 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
+		# update connection every 30 seconds
+		if [ $(($THIS_MIN_COUNTER % (30 / $THIS_WAIT_INTERVAL))) -eq 0 ]; then
 			. update-status-bar-connection
 		fi
 
