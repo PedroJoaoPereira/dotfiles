@@ -1,1 +1,0 @@
-.xinitrc##hostname.gentoo-personal-laptop

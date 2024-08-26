@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# toggle mute
-wpctl set-mute @DEFAULT_SOURCE@ toggle
-# refresh status bar
-refresh-status-bar-audio

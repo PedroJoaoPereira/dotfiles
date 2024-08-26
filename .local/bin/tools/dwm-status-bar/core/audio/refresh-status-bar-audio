@@ -1,4 +1,0 @@
-#!/bin/sh
-
-# + 0
-kill -34 "$(cat ~/.cache/status-bar-pid)"

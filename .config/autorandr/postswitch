@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# set background wallpaper
-feh --bg-fill --randomize ~/.config/wallpaper/*
-
