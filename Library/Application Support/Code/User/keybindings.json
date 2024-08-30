@@ -262,6 +262,13 @@
     "key": "cmd+w",
     "command": "-workbench.action.closeWindow",
     "when": "!editorIsOpen && !multipleEditorGroups"
+  },
+
+  // run vscode task
+  // ctrl + shift + b
+  {
+    "key": "ctrl+shift+b",
+    "command": "workbench.action.tasks.runTask"
   }
 
   //  untracked keybindings
