@@ -1,0 +1,255 @@
+// Place your key bindings in this file to override the defaults
+[
+  // copy to clipboardd
+  // ctrl + shift + c
+  {
+    "key": "ctrl+shift+c",
+    "command": "editor.action.clipboardCopyAction"
+  },
+  {
+    "key": "cmd+c",
+    "command": "-editor.action.clipboardCopyAction"
+  },
+
+  // cut to clipboard
+  // ctrl + shift + x
+  {
+    "key": "ctrl+shift+x",
+    "command": "editor.action.clipboardCutAction"
+  },
+  {
+    "key": "cmd+x",
+    "command": "-editor.action.clipboardCutAction"
+  },
+
+  // paste from clipboard
+  // ctrl + shift + v
+  {
+    "key": "ctrl+shift+v",
+    "command": "editor.action.clipboardPasteAction"
+  },
+  {
+    "key": "cmd+v",
+    "command": "-editor.action.clipboardPasteAction"
+  },
+
+  // open new vscode window
+  // ctrl + shift + v
+  {
+    "key": "ctrl+shift+n",
+    "command": "workbench.action.newWindow"
+  },
+  {
+    "key": "shift+cmd+n",
+    "command": "-workbench.action.newWindow"
+  },
+
+  // open recent projects
+  // ctrl + shift + r
+  {
+    "key": "ctrl+shift+r",
+    "command": "workbench.action.openRecent"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "-workbench.action.openRecent"
+  },
+
+  // select all
+  // ctrl + shift + a
+  {
+    "key": "ctrl+shift+a",
+    "command": "notebook.cell.output.selectAll",
+    "when": "notebookEditorFocused && notebookOutputFocused"
+  },
+  {
+    "key": "cmd+a",
+    "command": "-notebook.cell.output.selectAll",
+    "when": "notebookEditorFocused && notebookOutputFocused"
+  },
+  {
+    "key": "ctrl+shift+a",
+    "command": "editor.action.selectAll"
+  },
+  {
+    "key": "cmd+a",
+    "command": "-editor.action.selectAll"
+  },
+  {
+    "key": "ctrl+shift+a",
+    "command": "workbench.action.terminal.selectAll",
+    "when": "terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+  },
+  {
+    "key": "cmd+a",
+    "command": "-workbench.action.terminal.selectAll",
+    "when": "terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+shift+a",
+    "command": "list.selectAll",
+    "when": "listFocus && listSupportsMultiselect && !inputFocus && !treestickyScrollFocused"
+  },
+  {
+    "key": "cmd+a",
+    "command": "-list.selectAll",
+    "when": "listFocus && listSupportsMultiselect && !inputFocus && !treestickyScrollFocused"
+  },
+
+  // show all commands
+  // ctrl + shift + p
+  {
+    "key": "ctrl+shift+p",
+    "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "shift+cmd+p",
+    "command": "-workbench.action.showCommands"
+  },
+
+  // create new terminal
+  // ctrl + shift + ~
+  {
+    "key": "ctrl+shift+[Backslash]",
+    "command": "workbench.action.terminal.new",
+    "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+  },
+  {
+    "key": "ctrl+[Backslash]",
+    "command": "-workbench.action.terminal.new",
+    "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+  },
+
+  // find in terminal
+  // ctrl + shift + f
+  {
+    "key": "ctrl+shift+f",
+    "command": "workbench.action.terminal.focusFind",
+    "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-workbench.action.terminal.focusFind",
+    "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+  },
+
+  // toggle terminal focus
+  // ctrl + ~
+  {
+    "key": "ctrl+[Backslash]",
+    "command": "workbench.action.terminal.focus",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+[Backslash]",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "cmd+down",
+    "command": "-workbench.action.terminal.focus",
+    "when": "accessibilityModeEnabled && accessibleViewOnLastLine && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal' || accessibilityModeEnabled && accessibleViewOnLastLine && terminalProcessSupported && accessibleViewCurrentProviderId == 'terminal'"
+  },
+
+  // close focused terminal
+  // ctrl + w
+  {
+    "key": "cmd+w",
+    "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus"
+  },
+
+  // open file
+  // ctrl + p
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "cmd+p",
+    "command": "-workbench.action.quickOpen"
+  },
+
+  // toggle line comment
+  // ctrl + shit + 7
+  {
+    "key": "ctrl+shift+7",
+    "command": "editor.action.commentLine",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+cmd+7",
+    "command": "-editor.action.commentLine",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+
+  // undo
+  // ctrl + z
+  {
+    "key": "ctrl+z",
+    "command": "undo"
+  },
+  {
+    "key": "cmd+z",
+    "command": "-undo"
+  },
+
+  // redo
+  // ctrl + shift + z
+  {
+    "key": "ctrl+shift+z",
+    "command": "redo"
+  },
+  {
+    "key": "shift+cmd+z",
+    "command": "-redo"
+  },
+
+  // focus explorer view
+  // ctrl + shift + e
+  {
+    "key": "ctrl+shift+e",
+    "command": "workbench.view.explorer",
+    "when": "viewContainer.workbench.view.explorer.enabled"
+  },
+  {
+    "key": "shift+cmd+e",
+    "command": "-workbench.view.explorer",
+    "when": "viewContainer.workbench.view.explorer.enabled"
+  },
+
+  // collapse folders in explorer view when opened
+  // ctrl + shift + e
+  {
+    "key": "ctrl+shift+e",
+    "command": "workbench.files.action.collapseExplorerFolders",
+    "when": "explorerViewletFocus"
+  },
+
+  // save all files
+  // ctrl + s
+  {
+    "key": "ctrl+s",
+    "command": "saveAll"
+  },
+  {
+    "key": "alt+cmd+s",
+    "command": "-saveAll"
+  },
+
+  // close all editors
+  // ctrl + shift + w
+  {
+    "key": "ctrl+shift+w",
+    "command": "openEditors.closeAll"
+  },
+
+  // git checkout branch
+  // ctrl + shift + h
+  {
+    "key": "ctrl+shift+h",
+    "command": "git.checkout"
+  }
+
+  //  untracked keybindings
+]
