@@ -249,6 +249,19 @@
   {
     "key": "ctrl+shift+h",
     "command": "git.checkout"
+  },
+
+  // close window
+  // super + q
+  {
+    "key": "cmd+q",
+    "command": "workbench.action.closeWindow",
+    "when": "!editorIsOpen && !multipleEditorGroups"
+  },
+  {
+    "key": "cmd+w",
+    "command": "-workbench.action.closeWindow",
+    "when": "!editorIsOpen && !multipleEditorGroups"
   }
 
   //  untracked keybindings
