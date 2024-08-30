@@ -269,6 +269,17 @@
   {
     "key": "ctrl+shift+b",
     "command": "workbench.action.tasks.runTask"
+  },
+
+  // search in project files
+  // ctrl + shift + f
+  {
+    "key": "ctrl+shift+f",
+    "command": "workbench.action.findInFiles"
+  },
+  {
+    "key": "shift+cmd+f",
+    "command": "-workbench.action.findInFiles"
   }
 
   //  untracked keybindings
