@@ -23,6 +23,9 @@ brew "starship" # bash prompt customization
 
 # ----- ----- ----- -----
 
+# fonts
+cask "font-hack-nerd-font" # hack nerd font
+
 # usability
 cask "alt-tab" # alt-tab windows like
 cask "rectangle" # window manager
