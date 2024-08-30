@@ -17,7 +17,7 @@ eval "$(starship init bash)"
 # add zoxide to shell - a smarter cd
 eval "$(zoxide init --cmd cd bash)"
 # add fnm to shell - fast node manager
-eval "$(fnm env)"
+eval "$(fnm env --use-on-cd --shell bash)"
 
 alias ls='eza --long --icons --all --sort=type' # alias for ls with eza
 alias vi='nvim' # alias for neovim
