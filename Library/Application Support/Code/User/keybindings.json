@@ -280,6 +280,17 @@
   {
     "key": "shift+cmd+f",
     "command": "-workbench.action.findInFiles"
+  },
+
+  // close this window
+  // super + q
+  {
+    "key": "cmd+q",
+    "command": "workbench.action.closeWindow"
+  },
+  {
+    "key": "shift+cmd+w",
+    "command": "-workbench.action.closeWindow"
   }
 
   //  untracked keybindings
