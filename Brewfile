@@ -34,6 +34,8 @@ cask "ukelele" # keyboard layout editor
 
 # work related
 cask "visual-studio-code" # visual code
+cask "figma" # ux mockups
 
 # personal tools
+cask "google-chrome" # web browser
 cask "discord" # chat server
