@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# symlinks all custom scripts
+. ~/.local/bin/tools/utils/symlinks/refresh-user-bin-links
+# sets up this machine keys
+setup-keys-from-yadm
+# installs homebrew
+install-homebrew
+# install dependencies
+brew-upgrade
+# set yadm repo to ssh
+yadm remote set-url origin "git@github.com:PedroJoaoPereira/dotfiles.git"

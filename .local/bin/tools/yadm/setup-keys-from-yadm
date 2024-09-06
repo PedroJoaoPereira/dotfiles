@@ -1,6 +1,8 @@
 #!/bin/bash
 
+# gets keys archive
 get-private-keys
+# sets keys archive to yadm target
 symlink-keys-archive
 
 echo "Unarchiving with yadm..."

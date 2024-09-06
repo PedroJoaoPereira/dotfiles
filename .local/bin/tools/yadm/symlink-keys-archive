@@ -1,3 +1,4 @@
 #!/bin/bash
 
+# symlinks keys archive to yadm target
 ln -sfv ~/.config/dotfiles-secrets/hosts/mbio-work-laptop/archive ~/.local/share/yadm/archive

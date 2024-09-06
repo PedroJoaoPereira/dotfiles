@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Updating homebrew bundles
+# updates homebrew bundles
 if [ -f "$HOME/Brewfile" ]; then
 
   echo "Removing untracked homebrew bundles..."
@@ -15,5 +15,4 @@ if [ -f "$HOME/Brewfile" ]; then
 
   echo "Cleaning up homebrew..."
   brew cleanup -s && rm -rf "$(brew --cache)"
-
 fi
