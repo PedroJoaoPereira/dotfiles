@@ -43,3 +43,5 @@ yadm clone -b macos-work-laptop https://github.com/PedroJoaoPereira/dotfiles.git
 ```
 
 For `vscode` extensions, install `BhargavDetroja.export-your-extensions` from the marketplace and import `extensions.json` file.
+
+[Private dotfiles module](https://github.com/PedroJoaoPereira/dotfiles-secrets/blob/main/README.md)
