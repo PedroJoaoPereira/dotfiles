@@ -2,11 +2,17 @@
 
 # symlinks all custom scripts
 . ~/.local/bin/tools/utils/symlinks/refresh-user-bin-links
-# sets up this machine keys
-setup-keys-from-yadm
-# installs homebrew
-install-homebrew
 # install dependencies
 brew-upgrade
+# resets the shell
+exec bash --login
+# sets up this machine keys
+setup-keys-from-yadm
+# sets yadm configs
+yadm gitconfig user.email "PedroJoaoPereira@users.noreply.github.com"
+yadm gitconfig user.name "Pedro Pereira"
+yadm gitconfig user.signingkey "97B2121A211A6451"
+yadm gitconfig commit.gpgsign true
+yadm gitconfig pull.rebase true
 # set yadm repo to ssh
 yadm remote set-url origin "git@github.com:PedroJoaoPereira/dotfiles.git"
