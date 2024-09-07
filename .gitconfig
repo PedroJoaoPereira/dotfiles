@@ -1,0 +1,9 @@
+[user]
+	name = Pedro Pereira
+	email = PedroJoaoPereira@users.noreply.github.com
+[commit]
+	gpgsign = true
+[push]
+	autoSetupRemote = true
+[includeIf "gitdir:~/workspace/personal/**"]
+	path = ~/workspace/personal/.gitconfig

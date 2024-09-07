@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# gets keys archive
+get-private-keys
+# sets keys archive to yadm target
+symlink-keys-archive
+
+echo "Unarchiving with yadm..."
+yadm decrypt
+
+echo "Importing all keys to keyring..."
+find ~/.ssh/* -type f -name "*-sign" -exec gpg --import "{}" ";"
+
+echo "Trusting all keys in keyring..."
+gpg --list-keys --fingerprint --with-colons |
+  sed -E -n -e 's/^fpr:::::::::([0-9A-F]+):$/\1:6:/p' |
+  gpg --import-ownertrust

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# deletes all symlinks to custom scripts in ~/.local/bin
+find ${HOME}/.local/bin -maxdepth 1 -type l -delete
+# creates symlinks to custom scripts in ~/.local/bin
+find ${HOME}/.local/bin/tools/ -type f -exec ln -sfv "{}" ~/.local/bin/ ';'

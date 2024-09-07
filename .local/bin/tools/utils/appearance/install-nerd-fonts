@@ -1,0 +1,21 @@
+#!/bin/bash
+
+FONTS_DIR=${HOME}/.local/share/fonts/
+FONTS_REPO=https://github.com/ryanoasis/nerd-fonts/releases/latest/download/
+
+# recreate fonts folder
+rm -rf $FONTS_DIR
+mkdir -p $FONTS_DIR
+
+# iterates each argument - font name
+for THIS_FONT_NAME in "$@"; do
+    echo "Installing ${THIS_FONT_NAME}..."
+    curl -sSOL "${FONTS_REPO}${THIS_FONT_NAME}.tar.xz" --output-dir ${FONTS_DIR}
+    tar xf "${FONTS_DIR}${THIS_FONT_NAME}.tar.xz" --directory ${FONTS_DIR}
+    rm -rf "${FONTS_DIR}${THIS_FONT_NAME}.tar.xz"
+done
+
+# deletes useless artifacts
+find ${FONTS_DIR} -not -name "*.ttf" -type f -exec rm -rf "{}" ";"
+# refreshes fonts cache
+fc-cache -fv

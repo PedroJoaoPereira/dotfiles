@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# checks if secrets repo is cloned
+if [ ! -d ~/.config/dotfiles-secrets ]; then
+	# clones secrets repo
+	cd ~/.config
+	read -p "PedroJoaoPereira/dotfiles-secrets API access token: " apitoken
+	git clone https://$apitoken@github.com/PedroJoaoPereira/dotfiles-secrets.git
+fi
+
+# updates repo
+cd ~/.config/dotfiles-secrets
+git fetch origin
+git pull

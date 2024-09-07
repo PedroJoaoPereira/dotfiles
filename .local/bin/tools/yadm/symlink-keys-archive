@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# symlinks keys archive to yadm target
+ln -sfv ~/.config/dotfiles-secrets/hosts/$(uname -n)/archive ~/.local/share/yadm/archive
