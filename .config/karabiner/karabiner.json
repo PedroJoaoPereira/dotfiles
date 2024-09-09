@@ -1,5 +1,8 @@
 {
-    "global": { "check_for_updates_on_startup": false },
+    "global": {
+        "check_for_updates_on_startup": false,
+        "show_in_menu_bar": false
+    },
     "profiles": [
         {
             "complex_modifications": {
@@ -1838,6 +1841,16 @@
                     }
                 ]
             },
+            "devices": [
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 45108,
+                        "vendor_id": 1133
+                    },
+                    "ignore": false
+                }
+            ],
             "name": "Default profile",
             "selected": true
         }

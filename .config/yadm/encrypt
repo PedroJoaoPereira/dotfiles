@@ -1,8 +1,8 @@
-~/.ssh/mbio-enterprise-github
-~/.ssh/mbio-enterprise-github-sign
-~/.ssh/mbio-enterprise-github-sign.pub
-~/.ssh/mbio-enterprise-github.pub
-~/.ssh/mbio-personal-github
-~/.ssh/mbio-personal-github-sign
-~/.ssh/mbio-personal-github-sign.pub
-~/.ssh/mbio-personal-github.pub
+.ssh/mbio-enterprise-github
+.ssh/mbio-enterprise-github-sign
+.ssh/mbio-enterprise-github-sign.pub
+.ssh/mbio-enterprise-github.pub
+.ssh/mbio-personal-github
+.ssh/mbio-personal-github-sign
+.ssh/mbio-personal-github-sign.pub
+.ssh/mbio-personal-github.pub
