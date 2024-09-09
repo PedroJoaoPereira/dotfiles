@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# bootstraps custom scripts
+. ${HOME}/.local/bin/tools/utils/symlinks/refresh-user-bin-links
+# sets up this machine keys
+setup-keys-from-yadm
+# install fonts
+install-nerd-fonts Hack Ubuntu
+# set yadm repo to ssh
+yadm remote set-url origin "git@github.com:PedroJoaoPereira/dotfiles.git"
