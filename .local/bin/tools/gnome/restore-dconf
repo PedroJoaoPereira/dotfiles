@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# restores configuration
+dconf load / <${HOME}/.config/custom-dconf/dconf.props
