@@ -7,6 +7,7 @@ tap "homebrew/bundle"
 brew "fnm" # node version manager
 brew "git" # version control
 brew "neovim" # text editor
+brew "lazygit" # git tui
 
 # personal tools
 brew "openssh" # ssh command
