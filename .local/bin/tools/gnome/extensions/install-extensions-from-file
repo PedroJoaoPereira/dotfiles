@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# gets extension id from a url
+THIS_EXTENSIONS_FILE="${HOME}/.config/custom-gnome/gnome-extensions"
+# retrieves all content
+THIS_EXTENSIONS=$(cat ${THIS_EXTENSIONS_FILE} | sed '/^\s*#/d;/^\s*$/d')
+
+# iterates through the list
+for THIS_EXTENSION in ${THIS_EXTENSIONS}; do
+    echo "Installing Gnome extension: ${THIS_EXTENSION}..."
+    install-extension ${THIS_EXTENSION}
+done

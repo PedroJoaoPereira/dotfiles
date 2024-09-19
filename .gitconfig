@@ -2,6 +2,8 @@
 	name = Pedro Pereira
 	email = PedroJoaoPereira@users.noreply.github.com
 	signingkey = "A6BB21F779832371"
+[core]
+	editor = nvim
 [commit]
 	gpgsign = true
 [push]

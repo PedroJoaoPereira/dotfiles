@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# gets extension id from a url
+THIS_EXTENSION_ID=$(curl -s $1 | grep -oP 'data-uuid="\K[^"]+')
+# installs egnome extension
+gdbus call --session \
+    --dest org.gnome.Shell.Extensions \
+    --object-path /org/gnome/Shell/Extensions \
+    --method org.gnome.Shell.Extensions.InstallRemoteExtension \
+    "${THIS_EXTENSION_ID}" \
+    >/dev/null 2>&1

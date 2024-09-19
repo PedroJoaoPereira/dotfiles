@@ -10,8 +10,39 @@ window-width=1200
 [org/freedesktop/tracker/miner/files]
 index-recursive-directories=['&DESKTOP', '&DOCUMENTS', '&MUSIC', '&PICTURES', '&VIDEOS', '&DOWNLOAD']
 
+[org/gnome/GWeather4]
+temperature-unit='centigrade'
+
+[org/gnome/Weather]
+locations=[<(uint32 2, <('Nogueira', '', false, [(0.72056284522604486, -0.14423313150303058)], @a(dd) [])>)>]
+window-height=-1
+window-maximized=true
+window-width=-1
+
+[org/gnome/calculator]
+accuracy=3
+angle-units='degrees'
+base=10
+button-mode='advanced'
+number-format='automatic'
+refresh-interval=86400
+show-thousands=false
+show-zeroes=false
+source-currency='DZD'
+source-units='degree'
+target-currency='DZD'
+target-units='degree'
+window-maximized=false
+window-size=(680, 659)
+word-size=64
+
+[org/gnome/calendar]
+active-view='month'
+window-maximized=true
+window-size=(768, 600)
+
 [org/gnome/control-center]
-last-panel='info-overview'
+last-panel='online-accounts'
 window-state=(980, 640, true)
 
 [org/gnome/desktop/app-folders]
@@ -42,8 +73,8 @@ translate=true
 [org/gnome/desktop/background]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///home/chuck/.local/share/backgrounds/2024-09-12-18-53-59-colors-4k.jpg'
-picture-uri-dark='file:///home/chuck/.local/share/backgrounds/2024-09-12-18-53-59-colors-4k.jpg'
+picture-uri='file:///home/chuck/.config/wallpaper/8k.jpg'
+picture-uri-dark='file:///home/chuck/.config/wallpaper/8k.jpg'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
@@ -59,12 +90,13 @@ font-antialiasing='grayscale'
 font-hinting='slight'
 font-name='Ubuntu Nerd Font 10'
 gtk-enable-primary-paste=false
+gtk-theme='Adwaita'
 monospace-font-name='Hack Nerd Font Mono 10'
 show-battery-percentage=true
 toolkit-accessibility=false
 
 [org/gnome/desktop/notifications]
-application-children=['org-gnome-nautilus', 'discord', 'code-url-handler']
+application-children=['org-gnome-nautilus', 'discord', 'code-url-handler', 'gnome-power-panel', 'org-gnome-calendar', 'org-gnome-settings']
 
 [org/gnome/desktop/notifications/application/code-url-handler]
 application-id='code-url-handler.desktop'
@@ -72,8 +104,20 @@ application-id='code-url-handler.desktop'
 [org/gnome/desktop/notifications/application/discord]
 application-id='discord.desktop'
 
+[org/gnome/desktop/notifications/application/gnome-power-panel]
+application-id='gnome-power-panel.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-calendar]
+application-id='org.gnome.Calendar.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-extensions-desktop]
+application-id='org.gnome.Extensions.desktop.desktop'
+
 [org/gnome/desktop/notifications/application/org-gnome-nautilus]
 application-id='org.gnome.Nautilus.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-settings]
+application-id='org.gnome.Settings.desktop'
 
 [org/gnome/desktop/peripherals/keyboard]
 delay=uint32 329
@@ -131,8 +175,8 @@ move-to-workspace-left=@as []
 move-to-workspace-right=@as []
 panel-run-dialog=@as []
 show-desktop=['<Super>m']
-switch-applications=['<Alt>Tab']
-switch-applications-backward=['<Shift><Alt>Tab']
+switch-applications=@as []
+switch-applications-backward=@as []
 switch-group=@as []
 switch-group-backward=@as []
 switch-input-source=@as []
@@ -143,6 +187,8 @@ switch-to-workspace-1=@as []
 switch-to-workspace-last=@as []
 switch-to-workspace-left=@as []
 switch-to-workspace-right=@as []
+switch-windows=['<Alt>Tab']
+switch-windows-backward=['<Shift><Alt>Tab']
 toggle-fullscreen=@as []
 toggle-maximized=@as []
 unmaximize=@as []
@@ -211,9 +257,108 @@ sleep-inactive-battery-timeout=1800
 
 [org/gnome/shell]
 app-picker-layout=[{'org.gnome.Extensions.desktop': <{'position': <0>}>, 'org.gnome.Settings.desktop': <{'position': <1>}>, 'Utilities': <{'position': <2>}>, '8d0154d1-d9ac-4ee2-8a7b-6940b7d82036': <{'position': <3>}>, 'ca.desrt.dconf-editor.desktop': <{'position': <4>}>}]
+disable-user-extensions=false
+disabled-extensions=['native-window-placement@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com', 'blur-my-shell@aunetx', 'date-menu-formatter@marcinjakubowski.github.com']
 favorite-apps=['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'code.desktop', 'org.gnome.Terminal.desktop', 'discord.desktop']
 last-selected-power-profile='performance'
 welcome-dialog-last-shown-version='45.5'
+
+[org/gnome/shell/extensions/blur-my-shell/appfolder]
+style-dialogs=2
+
+[org/gnome/shell/extensions/blur-my-shell/dash-to-dock]
+blur=false
+
+[org/gnome/shell/extensions/blur-my-shell/dash-to-panel]
+blur-original-panel=true
+
+[org/gnome/shell/extensions/blur-my-shell/hidetopbar]
+compatibility=false
+
+[org/gnome/shell/extensions/blur-my-shell/overview]
+blur=true
+customize=false
+style-components=1
+
+[org/gnome/shell/extensions/blur-my-shell/panel]
+blur=true
+customize=false
+force-light-text=false
+override-background=false
+override-background-dynamically=true
+static-blur=true
+style-panel=0
+unblur-in-overview=true
+
+[org/gnome/shell/extensions/dash-to-panel]
+animate-appicon-hover=false
+animate-appicon-hover-animation-extent={'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}
+appicon-margin=4
+appicon-padding=3
+available-monitors=[0]
+dot-position='BOTTOM'
+dot-style-focused='DASHES'
+dot-style-unfocused='SQUARES'
+enter-peek-mode-timeout=500
+group-apps=true
+hide-overview-on-startup=true
+hotkeys-overlay-combo='TEMPORARILY'
+leave-timeout=100
+leftbox-padding=0
+leftbox-size=12
+middle-click-action='QUIT'
+overview-click-to-exit=true
+panel-anchors='{"0":"MIDDLE"}'
+panel-element-positions='{"0":[{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":false,"position":"stackedTL"},{"element":"centerBox","visible":false,"position":"stackedBR"},{"element":"rightBox","visible":false,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedTL"},{"element":"showAppsButton","visible":true,"position":"centerMonitor"},{"element":"taskbar","visible":true,"position":"centerMonitor"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
+panel-lengths='{"0":100}'
+panel-sizes='{"0":24}'
+peek-mode=true
+peek-mode-opacity=40
+preview-custom-opacity=80
+preview-middle-click-close=true
+preview-use-custom-opacity=true
+primary-monitor=0
+scroll-icon-action='NOTHING'
+scroll-panel-action='NOTHING'
+scroll-panel-show-ws-popup=false
+shift-click-action='LAUNCH'
+shift-middle-click-action='QUIT'
+show-apps-icon-file=''
+show-window-previews-timeout=400
+status-icon-padding=-1
+trans-dynamic-anim-time=200
+trans-use-custom-bg=false
+trans-use-custom-opacity=true
+trans-use-dynamic-opacity=true
+tray-padding=-1
+tray-size=12
+window-preview-animation-time=260
+window-preview-aspect-ratio-x=16
+window-preview-aspect-ratio-y=9
+window-preview-custom-icon-size=16
+window-preview-fixed-x=false
+window-preview-fixed-y=true
+window-preview-hide-immediate-click=false
+window-preview-padding=8
+window-preview-show-title=true
+window-preview-size=200
+window-preview-title-font-color='#dddddd'
+window-preview-title-font-size=12
+window-preview-title-font-weight='inherit'
+window-preview-title-position='TOP'
+window-preview-use-custom-icon-size=false
+
+[org/gnome/shell/extensions/date-menu-formatter]
+font-size=10
+formatter='01_luxon'
+pattern='EEE,    d MMM    H : mm'
+remove-messages-indicator=false
+text-align='center'
+update-level=0
+
+[org/gnome/shell/extensions/user-theme]
+name=''
 
 [org/gnome/shell/keybindings]
 focus-active-notification=@as []
@@ -225,7 +370,12 @@ toggle-application-view=@as []
 toggle-message-tray=@as []
 toggle-quick-settings=@as []
 
+[org/gnome/shell/weather]
+automatic-location=true
+locations=[<(uint32 2, <('Nogueira', '', false, [(0.72056284522604486, -0.14423313150303058)], @a(dd) [])>)>]
+
 [org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+audible-bell=false
 bold-is-bright=true
 default-size-columns=160
 default-size-rows=48
@@ -251,7 +401,7 @@ window-size=(1171, 650)
 [org/gtk/settings/file-chooser]
 date-format='regular'
 location-mode='path-bar'
-show-hidden=false
+show-hidden=true
 show-size-column=true
 show-type-column=true
 sidebar-width=150
