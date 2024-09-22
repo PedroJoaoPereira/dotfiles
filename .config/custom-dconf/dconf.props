@@ -15,25 +15,24 @@ temperature-unit='centigrade'
 
 [org/gnome/Weather]
 locations=[<(uint32 2, <('Nogueira', '', false, [(0.72056284522604486, -0.14423313150303058)], @a(dd) [])>)>]
-window-height=-1
+window-height=490
 window-maximized=true
-window-width=-1
+window-width=992
 
 [org/gnome/calculator]
-accuracy=3
+accuracy=9
 angle-units='degrees'
 base=10
-button-mode='advanced'
+button-mode='basic'
 number-format='automatic'
-refresh-interval=86400
 show-thousands=false
 show-zeroes=false
-source-currency='DZD'
+source-currency=''
 source-units='degree'
-target-currency='DZD'
-target-units='degree'
+target-currency=''
+target-units='radian'
 window-maximized=false
-window-size=(680, 659)
+window-size=(360, 497)
 word-size=64
 
 [org/gnome/calendar]
@@ -42,7 +41,7 @@ window-maximized=true
 window-size=(768, 600)
 
 [org/gnome/control-center]
-last-panel='online-accounts'
+last-panel='info-overview'
 window-state=(980, 640, true)
 
 [org/gnome/desktop/app-folders]
@@ -61,7 +60,7 @@ translate=true
 [org/gnome/desktop/app-folders/folders/Utilities]
 apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.Loupe.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop', 'wpa_gui.desktop', 'org.gnome.Sysprof.desktop', 'cups.desktop', 'Gentoo-system-config-printer.desktop']
 categories=['X-GNOME-Utilities']
-excluded-apps=['org.gnome.Extensions.desktop']
+excluded-apps=['org.gnome.Extensions.desktop', 'org.gnome.Calculator.desktop']
 name='X-GNOME-Utilities.directory'
 translate=true
 
@@ -85,18 +84,18 @@ sources=[('xkb', 'pt')]
 [org/gnome/desktop/interface]
 clock-show-weekday=true
 color-scheme='prefer-dark'
+enable-animations=true
 enable-hot-corners=false
 font-antialiasing='grayscale'
 font-hinting='slight'
 font-name='Ubuntu Nerd Font 10'
 gtk-enable-primary-paste=false
-gtk-theme='Adwaita'
 monospace-font-name='Hack Nerd Font Mono 10'
 show-battery-percentage=true
 toolkit-accessibility=false
 
 [org/gnome/desktop/notifications]
-application-children=['org-gnome-nautilus', 'discord', 'code-url-handler', 'gnome-power-panel', 'org-gnome-calendar', 'org-gnome-settings']
+application-children=['org-gnome-nautilus', 'discord', 'code-url-handler', 'org-gnome-calendar']
 
 [org/gnome/desktop/notifications/application/code-url-handler]
 application-id='code-url-handler.desktop'
@@ -104,20 +103,11 @@ application-id='code-url-handler.desktop'
 [org/gnome/desktop/notifications/application/discord]
 application-id='discord.desktop'
 
-[org/gnome/desktop/notifications/application/gnome-power-panel]
-application-id='gnome-power-panel.desktop'
-
 [org/gnome/desktop/notifications/application/org-gnome-calendar]
 application-id='org.gnome.Calendar.desktop'
 
-[org/gnome/desktop/notifications/application/org-gnome-extensions-desktop]
-application-id='org.gnome.Extensions.desktop.desktop'
-
 [org/gnome/desktop/notifications/application/org-gnome-nautilus]
 application-id='org.gnome.Nautilus.desktop'
-
-[org/gnome/desktop/notifications/application/org-gnome-settings]
-application-id='org.gnome.Settings.desktop'
 
 [org/gnome/desktop/peripherals/keyboard]
 delay=uint32 329
@@ -141,6 +131,7 @@ primary-color='#000000000000'
 secondary-color='#000000000000'
 
 [org/gnome/desktop/search-providers]
+enabled=['org.gnome.Weather.desktop']
 sort-order=['org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Nautilus.desktop']
 
 [org/gnome/desktop/session]
@@ -256,109 +247,75 @@ power-button-action='interactive'
 sleep-inactive-battery-timeout=1800
 
 [org/gnome/shell]
-app-picker-layout=[{'org.gnome.Extensions.desktop': <{'position': <0>}>, 'org.gnome.Settings.desktop': <{'position': <1>}>, 'Utilities': <{'position': <2>}>, '8d0154d1-d9ac-4ee2-8a7b-6940b7d82036': <{'position': <3>}>, 'ca.desrt.dconf-editor.desktop': <{'position': <4>}>}]
+app-picker-layout=[{'btop.desktop': <{'position': <0>}>, 'org.gnome.Calculator.desktop': <{'position': <1>}>, 'org.gnome.Weather.desktop': <{'position': <2>}>, 'org.gnome.Calendar.desktop': <{'position': <3>}>, 'org.gnome.Extensions.desktop': <{'position': <4>}>, 'org.gnome.Settings.desktop': <{'position': <5>}>, 'Utilities': <{'position': <6>}>, '8d0154d1-d9ac-4ee2-8a7b-6940b7d82036': <{'position': <7>}>, 'ca.desrt.dconf-editor.desktop': <{'position': <8>}>}]
 disable-user-extensions=false
-disabled-extensions=['native-window-placement@gnome-shell-extensions.gcampax.github.com']
-enabled-extensions=['launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com', 'blur-my-shell@aunetx', 'date-menu-formatter@marcinjakubowski.github.com']
+enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'blur-my-shell@aunetx', 'just-perfection-desktop@just-perfection', 'aztaskbar@aztaskbar.gitlab.com', 'weatherornot@somepaulo.github.io', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com']
 favorite-apps=['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'code.desktop', 'org.gnome.Terminal.desktop', 'discord.desktop']
 last-selected-power-profile='performance'
 welcome-dialog-last-shown-version='45.5'
 
-[org/gnome/shell/extensions/blur-my-shell/appfolder]
-style-dialogs=2
-
-[org/gnome/shell/extensions/blur-my-shell/dash-to-dock]
-blur=false
+[org/gnome/shell/extensions/aztaskbar]
+clock-font-size=(false, 12)
+clock-position-in-panel='LEFT'
+favorites-on-all-monitors=true
+icon-size=16
+isolate-monitors=false
+isolate-workspaces=false
+main-panel-height=(true, 24)
+middle-click-action='QUIT'
+override-panel-clock-format=(true, '%a, %d %b %y  - %H∶%M')
+panel-location='BOTTOM'
+position-in-panel='CENTER'
+position-offset=0
+scroll-action='NO_ACTION'
+shift-middle-click-action='QUIT'
+show-apps-button=(true, 0)
+show-panel-activities-button=false
+show-weather-by-clock='OFF'
 
 [org/gnome/shell/extensions/blur-my-shell/dash-to-panel]
-blur-original-panel=true
-
-[org/gnome/shell/extensions/blur-my-shell/hidetopbar]
-compatibility=false
-
-[org/gnome/shell/extensions/blur-my-shell/overview]
-blur=true
-customize=false
-style-components=1
+blur-original-panel=false
 
 [org/gnome/shell/extensions/blur-my-shell/panel]
-blur=true
-customize=false
 force-light-text=false
-override-background=false
 override-background-dynamically=true
-static-blur=true
-style-panel=0
-unblur-in-overview=true
 
-[org/gnome/shell/extensions/dash-to-panel]
-animate-appicon-hover=false
-animate-appicon-hover-animation-extent={'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}
-appicon-margin=4
-appicon-padding=3
-available-monitors=[0]
-dot-position='BOTTOM'
-dot-style-focused='DASHES'
-dot-style-unfocused='SQUARES'
-enter-peek-mode-timeout=500
-group-apps=true
-hide-overview-on-startup=true
-hotkeys-overlay-combo='TEMPORARILY'
-leave-timeout=100
-leftbox-padding=0
-leftbox-size=12
-middle-click-action='QUIT'
-overview-click-to-exit=true
-panel-anchors='{"0":"MIDDLE"}'
-panel-element-positions='{"0":[{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":false,"position":"stackedTL"},{"element":"centerBox","visible":false,"position":"stackedBR"},{"element":"rightBox","visible":false,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedTL"},{"element":"showAppsButton","visible":true,"position":"centerMonitor"},{"element":"taskbar","visible":true,"position":"centerMonitor"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
-panel-lengths='{"0":100}'
-panel-sizes='{"0":24}'
-peek-mode=true
-peek-mode-opacity=40
-preview-custom-opacity=80
-preview-middle-click-close=true
-preview-use-custom-opacity=true
-primary-monitor=0
-scroll-icon-action='NOTHING'
-scroll-panel-action='NOTHING'
-scroll-panel-show-ws-popup=false
-shift-click-action='LAUNCH'
-shift-middle-click-action='QUIT'
-show-apps-icon-file=''
-show-window-previews-timeout=400
-status-icon-padding=-1
-trans-dynamic-anim-time=200
-trans-use-custom-bg=false
-trans-use-custom-opacity=true
-trans-use-dynamic-opacity=true
-tray-padding=-1
-tray-size=12
-window-preview-animation-time=260
-window-preview-aspect-ratio-x=16
-window-preview-aspect-ratio-y=9
-window-preview-custom-icon-size=16
-window-preview-fixed-x=false
-window-preview-fixed-y=true
-window-preview-hide-immediate-click=false
-window-preview-padding=8
-window-preview-show-title=true
-window-preview-size=200
-window-preview-title-font-color='#dddddd'
-window-preview-title-font-size=12
-window-preview-title-font-weight='inherit'
-window-preview-title-position='TOP'
-window-preview-use-custom-icon-size=false
+[org/gnome/shell/extensions/just-perfection]
+accessibility-menu=true
+activities-button=true
+animation=4
+background-menu=true
+clock-menu-position=2
+controls-manager-spacing-size=0
+dash=true
+dash-icon-size=0
+double-super-to-appgrid=true
+keyboard-layout=true
+max-displayed-search-results=0
+notification-banner-position=5
+osd=true
+panel=true
+panel-in-overview=true
+ripple-box=true
+search=true
+show-apps-button=true
+startup-status=0
+theme=false
+top-panel-position=1
+window-demands-attention-focus=false
+window-maximized-on-create=false
+window-picker-icon=true
+window-preview-caption=true
+window-preview-close-button=true
+workspace=true
+workspace-background-corner-size=0
+workspace-popup=true
+workspace-switcher-should-show=false
+workspace-wrap-around=true
+workspaces-in-app-grid=true
 
-[org/gnome/shell/extensions/date-menu-formatter]
-font-size=10
-formatter='01_luxon'
-pattern='EEE,    d MMM    H : mm'
-remove-messages-indicator=false
-text-align='center'
-update-level=0
-
-[org/gnome/shell/extensions/user-theme]
-name=''
+[org/gnome/shell/extensions/weatherornot]
+position='left'
 
 [org/gnome/shell/keybindings]
 focus-active-notification=@as []
