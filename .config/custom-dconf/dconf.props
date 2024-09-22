@@ -258,7 +258,7 @@ welcome-dialog-last-shown-version='45.5'
 clock-font-size=(false, 12)
 clock-position-in-panel='LEFT'
 favorites-on-all-monitors=true
-icon-size=16
+icon-size=15
 isolate-monitors=false
 isolate-workspaces=false
 main-panel-height=(true, 24)
@@ -323,7 +323,7 @@ screenshot=['Print']
 screenshot-window=@as []
 show-screen-recording-ui=@as []
 show-screenshot-ui=['<Shift><Super>s']
-toggle-application-view=@as []
+toggle-application-view=['<Super>space']
 toggle-message-tray=@as []
 toggle-quick-settings=@as []
 

@@ -7,6 +7,10 @@
 setup-keys-from-yadm
 # installs fonts
 install-nerd-fonts Hack Ubuntu
+# installs gnome extensions
+install-extensions-from-file
+# restores gnome properties
+restore-dconf
 
 # sets yadm repo to ssh
 yadm remote set-url origin "git@github.com:PedroJoaoPereira/dotfiles.git"
