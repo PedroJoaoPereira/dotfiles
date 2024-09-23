@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# dumps new configuration
+# dumps dconf properties
 dconf dump / >${HOME}/.config/custom-dconf/dconf.props

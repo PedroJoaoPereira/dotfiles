@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# gets popcorn kernel repository
+get-popcorn-kernel
+cd ${HOME}/.config/popcorn-kernel
+
+# retrieves all snippets from a file
+THIS_SNIPPETS=$(cat ${HOME}/.config/custom-kernel/custom-config-snippets | sed '/^\s*#/d;/^\s*$/d')
+# installs each snippet from the list
+for THIS_SNIPPET in ${THIS_SNIPPETS}; do
+  THIS_SNIPPET_TRIM=$(echo ${THIS_SNIPPET} | sed 's/\.config//')
+  echo "Installing snippet: ${THIS_SNIPPET_TRIM}..."
+  doas stow -D --target=/ ${THIS_SNIPPET_TRIM} >/dev/null 2>&1
+  doas stow --target=/ --adopt ${THIS_SNIPPET_TRIM} >/dev/null 2>&1
+done

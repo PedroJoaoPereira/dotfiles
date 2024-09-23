@@ -6,57 +6,55 @@ if [[ -z "$(which gnome-weather)" ]]; then
     exit 1
 fi
 
-# gets this machine language
-THIS_LANG=$(locale | sed -n 's/^LANG=\([^_]*\).*/\1/p')
-
-# gets location from user input
+# reads location from user input
 read -p 'New gnome-weather location: ' THIS_LOCATION_QUERY
-# replaces any white space with encoded character
-THIS_LOCATION_QUERY="$(echo $THIS_LOCATION_QUERY | sed 's/ /+/g')"
+# encodes white spaces
+THIS_LOCATION_QUERY="$(echo ${THIS_LOCATION_QUERY} | sed 's/ /+/g')"
 
+# gets system language
+THIS_LANG=$(locale | sed -n 's/^LANG=\([^_]*\).*/\1/p')
 # gets location weather data
 THIS_LOCATION_DATA=$(curl "https://nominatim.openstreetmap.org/search?q=${THIS_LOCATION_QUERY}&format=json&limit=1" -H "Accept-Language: ${THIS_LANG}" -s)
 # checks if location exists
-if [[ $THIS_LOCATION_DATA == '[]' ]]; then
+if [[ ${THIS_LOCATION_DATA} == '[]' ]]; then
     echo 'New gnome-weather location not found...'
     exit 1
 fi
 
-# gets user confirmation
-read -p "Add $(echo $THIS_LOCATION_DATA | sed 's/.*"display_name":"//' | sed 's/".*//') to gnome-weather locations? [y/N] : " THIS_CONFIRMATION
-# checks if positive confirmation
-if [[ ! $THIS_CONFIRMATION == 'y' ]]; then
+# reads user confirmation
+read -p "Add $(echo ${THIS_LOCATION_DATA} | sed 's/.*"display_name":"//' | sed 's/".*//') to gnome-weather locations? [y/N] : " THIS_CONFIRMATION
+# checks if confirmed
+if [[ ! ${THIS_CONFIRMATION} == 'y' ]]; then
     echo 'New gnome-weather location not confirmed...'
     exit 1
 fi
 
 # gets location id
-THIS_LOCATION_ID=$(echo $THIS_LOCATION_DATA | sed 's/.*"place_id"://' | sed 's/,.*//')
+THIS_LOCATION_ID=$(echo ${THIS_LOCATION_DATA} | sed 's/.*"place_id"://' | sed 's/,.*//')
 # gets location details
 THIS_LOCATION_DETAILS=$(curl "https://nominatim.openstreetmap.org/details.php?place_id=${THIS_LOCATION_ID}&format=json" -s)
-# gets location name from the details
-if [[ $THIS_LOCATION_DETAILS == *"name:${THIS_LANG}"* ]]; then
-    THIS_LOCATION_NAME=$(echo $THIS_LOCATION_DETAILS | sed "s/.*\"name:${THIS_LANG}\": \"//" | sed 's/".*//')
+# gets location name
+if [[ ${THIS_LOCATION_DETAILS} == *"name:${THIS_LANG}"* ]]; then
+    THIS_LOCATION_NAME=$(echo ${THIS_LOCATION_DETAILS} | sed "s/.*\"name:${THIS_LANG}\": \"//" | sed 's/".*//')
 else
-    THIS_LOCATION_NAME=$(echo $THIS_LOCATION_DETAILS | sed 's/.*"name": "//' | sed 's/".*//')
+    THIS_LOCATION_NAME=$(echo ${THIS_LOCATION_DETAILS} | sed 's/.*"name": "//' | sed 's/".*//')
 fi
 
 # gets weather location latitude
-THIS_LATITUDE=$(echo $THIS_LOCATION_DATA | sed 's/.*"lat":"//' | sed 's/".*//')
+THIS_LATITUDE=$(echo ${THIS_LOCATION_DATA} | sed 's/.*"lat":"//' | sed 's/".*//')
 THIS_LATITUDE=$(echo "${THIS_LATITUDE} / (180 / 3.141592654)" | bc -l)
 
 # gets weather location longitude
-THIS_LONGITUDE=$(echo $THIS_LOCATION_DATA | sed 's/.*"lon":"//' | sed 's/".*//')
+THIS_LONGITUDE=$(echo ${THIS_LOCATION_DATA} | sed 's/.*"lon":"//' | sed 's/".*//')
 THIS_LONGITUDE=$(echo "${THIS_LONGITUDE} / (180 / 3.141592654)" | bc -l)
 
-# sets gnome-weather location object
+# sets gnome-weather location
 THIS_LOCATION="<(uint32 2, <('${THIS_LOCATION_NAME}', '', false, [(${THIS_LATITUDE}, ${THIS_LONGITUDE})], @a(dd) [])>)>"
 # gets gnome-weather locations
 THIS_GNOME_LOCATIONS=$(gsettings get org.gnome.Weather locations)
-
-# appends location to gnome locations
-if [[ ! $THIS_GNOME_LOCATIONS == '@av []' ]]; then
-    gsettings set org.gnome.Weather locations "$(echo $THIS_GNOME_LOCATIONS | sed "s|>]|>, ${THIS_LOCATION}]|")"
+# appends location to gnome-weather locations
+if [[ ! ${THIS_GNOME_LOCATIONS} == '@av []' ]]; then
+    gsettings set org.gnome.Weather locations "$(echo ${THIS_GNOME_LOCATIONS} | sed "s|>]|>, ${THIS_LOCATION}]|")"
 else
     gsettings set org.gnome.Weather locations "[${THIS_LOCATION}]"
 fi

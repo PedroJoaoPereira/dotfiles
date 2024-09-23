@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# checks if popcorn kernel repo is cloned
+if [ ! -d ${HOME}/.config/popcorn-kernel ]; then
+	cd ${HOME}/.config
+	git clone https://codeberg.org/ranguli/gentoo-popcorn-kernel popcorn-kernel
+fi
+
+# updates repo
+cd ${HOME}/.config/popcorn-kernel
+git fetch origin
+git pull

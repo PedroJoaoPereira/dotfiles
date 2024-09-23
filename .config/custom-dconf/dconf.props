@@ -239,7 +239,7 @@ screenreader=@as []
 
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Super>Return'
-command='gnome-terminal'
+command='alacritty'
 name='Run Terminal'
 
 [org/gnome/settings-daemon/plugins/power]
@@ -250,7 +250,7 @@ sleep-inactive-battery-timeout=1800
 app-picker-layout=[{'btop.desktop': <{'position': <0>}>, 'org.gnome.Calculator.desktop': <{'position': <1>}>, 'org.gnome.Weather.desktop': <{'position': <2>}>, 'org.gnome.Calendar.desktop': <{'position': <3>}>, 'org.gnome.Extensions.desktop': <{'position': <4>}>, 'org.gnome.Settings.desktop': <{'position': <5>}>, 'Utilities': <{'position': <6>}>, '8d0154d1-d9ac-4ee2-8a7b-6940b7d82036': <{'position': <7>}>, 'ca.desrt.dconf-editor.desktop': <{'position': <8>}>}]
 disable-user-extensions=false
 enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'blur-my-shell@aunetx', 'just-perfection-desktop@just-perfection', 'aztaskbar@aztaskbar.gitlab.com', 'weatherornot@somepaulo.github.io', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com']
-favorite-apps=['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'code.desktop', 'org.gnome.Terminal.desktop', 'discord.desktop']
+favorite-apps=['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'code.desktop', 'discord.desktop']
 last-selected-power-profile='performance'
 welcome-dialog-last-shown-version='45.5'
 
@@ -315,7 +315,7 @@ workspace-wrap-around=true
 workspaces-in-app-grid=true
 
 [org/gnome/shell/extensions/weatherornot]
-position='left'
+position='right'
 
 [org/gnome/shell/keybindings]
 focus-active-notification=@as []
