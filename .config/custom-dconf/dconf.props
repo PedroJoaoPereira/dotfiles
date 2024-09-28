@@ -95,7 +95,7 @@ show-battery-percentage=true
 toolkit-accessibility=false
 
 [org/gnome/desktop/notifications]
-application-children=['org-gnome-nautilus', 'discord', 'code-url-handler', 'org-gnome-calendar']
+application-children=['org-gnome-nautilus', 'discord', 'code-url-handler', 'org-gnome-calendar', 'gnome-power-panel', 'org-gnome-extensions-desktop']
 
 [org/gnome/desktop/notifications/application/code-url-handler]
 application-id='code-url-handler.desktop'
@@ -103,8 +103,14 @@ application-id='code-url-handler.desktop'
 [org/gnome/desktop/notifications/application/discord]
 application-id='discord.desktop'
 
+[org/gnome/desktop/notifications/application/gnome-power-panel]
+application-id='gnome-power-panel.desktop'
+
 [org/gnome/desktop/notifications/application/org-gnome-calendar]
 application-id='org.gnome.Calendar.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-extensions-desktop]
+application-id='org.gnome.Extensions.desktop.desktop'
 
 [org/gnome/desktop/notifications/application/org-gnome-nautilus]
 application-id='org.gnome.Nautilus.desktop'
@@ -153,10 +159,10 @@ cycle-panels-backward=@as []
 cycle-windows=@as []
 cycle-windows-backward=@as []
 minimize=['<Super>Down']
-move-to-monitor-down=@as []
-move-to-monitor-left=@as []
-move-to-monitor-right=@as []
-move-to-monitor-up=@as []
+move-to-monitor-down=['<Shift><Super>Down']
+move-to-monitor-left=['<Shift><Super>Left']
+move-to-monitor-right=['<Shift><Super>Right']
+move-to-monitor-up=['<Shift><Super>Up']
 move-to-workspace-1=@as []
 move-to-workspace-2=@as []
 move-to-workspace-3=@as []
@@ -180,7 +186,7 @@ switch-to-workspace-left=@as []
 switch-to-workspace-right=@as []
 switch-windows=['<Alt>Tab']
 switch-windows-backward=['<Shift><Alt>Tab']
-toggle-fullscreen=@as []
+toggle-fullscreen=['<Super>f']
 toggle-maximized=@as []
 unmaximize=@as []
 
@@ -210,7 +216,7 @@ show-delete-permanently=true
 
 [org/gnome/nautilus/window-state]
 initial-size=(890, 550)
-maximized=true
+maximized=false
 
 [org/gnome/nm-applet/eap/69072c05-e461-4d56-bbe3-b5fe3d510d7e]
 ignore-ca-cert=false
@@ -257,6 +263,7 @@ welcome-dialog-last-shown-version='45.5'
 [org/gnome/shell/extensions/aztaskbar]
 clock-font-size=(false, 12)
 clock-position-in-panel='LEFT'
+clock-position-offset=0
 favorites-on-all-monitors=true
 icon-size=15
 isolate-monitors=false
@@ -286,6 +293,7 @@ activities-button=true
 animation=4
 background-menu=true
 clock-menu-position=2
+clock-menu-position-offset=0
 controls-manager-spacing-size=0
 dash=true
 dash-icon-size=0
@@ -315,7 +323,7 @@ workspace-wrap-around=true
 workspaces-in-app-grid=true
 
 [org/gnome/shell/extensions/weatherornot]
-position='right'
+position='left'
 
 [org/gnome/shell/keybindings]
 focus-active-notification=@as []

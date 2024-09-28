@@ -6,7 +6,7 @@
 0005-no-firewire.config
 0006-no-cd-dvd-tape.config
 0007-no-sony-memorystick.config
-0008-no-fujistu.config
+#0008-no-fujistu.config
 0009-no-nvidia-gpu.config
 0010-no-xen.config
 0011-no-pci-sound-devices.config
@@ -16,7 +16,7 @@
 0015-no-nfc.config
 0016-no-old-partition-types.config
 0017-no-pci-media.config
-0018-no-toshiba.config
+#0018-no-toshiba.config
 0019-no-fpga.config
 0020-no-acer.config
 0021-no-asus.config
