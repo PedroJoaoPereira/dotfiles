@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "ola"
+echo "ola ${DEVICE} ${HOST}"
