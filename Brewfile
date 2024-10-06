@@ -34,6 +34,7 @@ cask "karabiner-elements" # keyboard mappings
 cask "ukelele" # keyboard layout editor
 
 # work related
+cask "alacritty" # terminal emulator
 cask "visual-studio-code" # visual code
 cask "figma" # ux mockups
 cask "pingid" # authenticator
