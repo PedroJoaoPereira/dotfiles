@@ -1,0 +1,12 @@
+#!/bin/bash
+
+export BOOTSTRAPPER_DIR="/home/chuck/.bootstrapper"
+export HOST_DIR="${BOOTSTRAPPER_DIR}/hosts/$(uname -n)"
+export HOST_SCRIPTS_DIR="${HOST_DIR}/scripts"
+export STOWABLES_DIR="${HOST_DIR}/stowables"
+export SHARED_DIR="${BOOTSTRAPPER_DIR}/hosts/shared"
+export SHARED_SCRIPTS_DIR="${SHARED_DIR}/scripts"
+
+source "${SHARED_SCRIPTS_DIR}/admin/execute-as-root.sh"
+source "${SHARED_SCRIPTS_DIR}/admin/stow-portage.sh"
+source "${HOST_SCRIPTS_DIR}/installation/install-base-dependencies.sh"
