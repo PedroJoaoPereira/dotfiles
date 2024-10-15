@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# ---------------------------------------------------------------------
+# bootstraps dotfiles for gentoo-laptop-msi-es
+# any non-root action will be executed as the user 'chuck'
+#     usage: bootstrap-gentoo-laptop-msi-es
+# ---------------------------------------------------------------------
+
+# checks shell permissions
+[[ ${EUID} -ne 0 ]] && exec doas $0
+# after this point, the script is running as root
+
+# installs required dependencies
+(equery --quiet list app-admin/stow >/dev/null) || emerge --ask=n --noreplace app-admin/stow
+(equery --quiet list app-admin/yadm >/dev/null) || emerge --ask=n --noreplace app-admin/yadm
+(equery --quiet list dev-vcs/git >/dev/null) || emerge --ask=n --noreplace dev-vcs/git
+
+# symlinks root directory
+bash /home/chuck/.local/bin/stow-root gentoo-laptop-msi-es chuck
+
+# /home/chuck/.local/bin/setup-secrets gentoo-laptop-msi-es chuck
+# TODO: sets up editor
+
+# sets default editor to neovim
+# [[ -z $(eselect editor list | grep '*' | grep /usr/bin/nvim) ]] && eselect editor set '/usr/bin/nvim'
+# env-update && source /etc/profile

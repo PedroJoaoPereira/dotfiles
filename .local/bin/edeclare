@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# ---------------------------------------------------------------------
+# installs and removes packages from portage declarative
+# by reading the configuration file /etc/portage/package.declare
+#     usage: edeclare
+# ---------------------------------------------------------------------
+
+# checks required dependencies
+[[ -z $(command -v equery) ]] && echo 'Missing command "equery"' && exit 1
+# checks required files
+[[ ! -f '/etc/portage/package.declare' ]] && exit 0
+
+# checks arguments and shell permissions
+[[ $# -gt 0 ]] && echo "Usage: edeclare" && exit 1
+[[ ${EUID} -ne 0 ]] && exec doas $0
+# after this point, the script is running as root
+
+# gets currently installed packages without versions
+INSTALLED_PACKAGES=$(equery --quiet list @selected | cut -d ' ' -f 5 | sed -n 's/-[0-9]\{1,\}.*$//p')
+# reads packages names without comments and empty lines
+DECLARED_PACKAGES=$(cat /etc/portage/package.declare | sed -E '/^[[:blank:]]*(#|$)/d; s/#.*//')
+# appends both lists to a single variable and remove duplicates
+ALL_PACKAGES=$(echo -e "${INSTALLED_PACKAGES}\n${DECLARED_PACKAGES}" | sort -u)
+
+# checks each of the packages
+SHOULD_CLEAN=''
+for PACKAGE in ${ALL_PACKAGES}; do
+  IS_INSTALLED=($([[ ${INSTALLED_PACKAGES} =~ ${PACKAGE} ]] && echo 'yes' || echo ''))
+  IS_DECLARED=($([[ ${DECLARED_PACKAGES} =~ ${PACKAGE} ]] && echo 'yes' || echo ''))
+
+  # checks that package is installed but not declared
+  if [[ ! -z ${IS_INSTALLED} && -z ${IS_DECLARED} ]]; then
+    emerge --ask=n --deselect ${PACKAGE}
+    SHOULD_CLEAN='yes'
+
+  # checks that package is declared but not installed
+  elif [[ -z ${IS_INSTALLED} && ! -z ${IS_DECLARED} ]]; then
+    emerge --ask=n ${PACKAGE}
+
+  # ignores anything else
+  else
+    continue
+  fi
+done
+
+# cleans removed packages
+[[ ! -z ${SHOULD_CLEAN} ]] && emerge --ask=n --depclean >/dev/null || true

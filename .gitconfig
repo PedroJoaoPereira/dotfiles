@@ -1,0 +1,13 @@
+[commit]
+	gpgsign = true
+[core]
+	editor = nvim
+[push]
+	autoSetupRemote = true
+	default = current
+[user]
+	name = Pedro Pereira
+	email = pedrojoaopereira@users.noreply.github.com
+
+[include]
+  path = .gitconfig.local
